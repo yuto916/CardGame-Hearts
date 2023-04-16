@@ -39,6 +39,12 @@ namespace Hearts
         PictureBox fourthPlayerPicBox;
 
 
+        int firstPlayerScore;
+        int secondPlayerScore;
+        int thirdPlayerScore;
+        int fourthPlayerScore;
+
+
         int playCount = 1;
         int gameRound = 1;
 
@@ -196,7 +202,7 @@ namespace Hearts
                 await Task.Delay(2000);
             }
 
-
+            UpdateScore(cardList);
 
         }
 
@@ -395,7 +401,71 @@ namespace Hearts
         }
 
 
-        
+
+        // ------------------------------------------------------------------------------------------------------------------------
+        private void UpdateScore(List<Card> cardList)
+        {
+            Suit leadingSuit = cardList[0].Suit;
+            List<Card> leadingSuitCards = cardList.Where(c => c.Suit == leadingSuit).ToList();
+
+            // Sort the list in descending order based on card value
+            leadingSuitCards.Sort((c1, c2) => c2.Value.CompareTo(c1.Value));
+
+            // Get the index of the first item in the sorted list
+            int highestValueIndex = cardList.IndexOf(leadingSuitCards[0]);
+
+
+            int score = CalculateScore(cardList);
+
+
+            if (highestValueIndex + 1 == firstPlayer)
+            {
+                firstPlayerScore += score;
+                txtPlayer1Score.Text = firstPlayerScore.ToString();
+            }
+            else if (highestValueIndex + 1 == secondPlayer)
+            {
+                secondPlayerScore += score;
+                txtPlayer2Score.Text = secondPlayerScore.ToString();
+            }
+            else if (highestValueIndex + 1 == thirdPlayer)
+            {
+                thirdPlayerScore += score;
+                txtPlayer3Score.Text = thirdPlayerScore.ToString();
+            }
+            else if (highestValueIndex + 1 == fourthPlayer)
+            {
+                fourthPlayerScore += score;
+                txtPlayer4Score.Text = fourthPlayerScore.ToString();
+            }
+
+            cardList.Clear();
+            player1PicBoxPlayCard.Image = null;
+            player2PicBoxPlayCard.Image = null;
+            player3PicBoxPlayCard.Image = null;
+            player4PicBoxPlayCard.Image = null;
+        }
+
+
+
+        private int CalculateScore(List<Card> cardList)
+        {
+            int score = 0;
+            int spadeQueenScore = 0;
+
+            int numberOfHearts = cardList.Count(c => c.Suit == Suit.Hearts);
+            bool containsSpade12 = cardList.Any(c => c.Suit == Suit.Spades && c.Value == Value.Queen);
+
+            if (containsSpade12 == true)
+            {
+                spadeQueenScore += 13;
+            }
+
+
+            score = numberOfHearts + spadeQueenScore;
+
+            return score;
+        }
         /* ********************************************************************************************************************** */
 
 
@@ -910,14 +980,14 @@ namespace Hearts
         }
 
 
-     
+
         public bool SuitExistsInHand(List<Card> hand, Suit suit)
         {
             return hand.Any(card => card.Suit == suit);
         }
 
 
-       
+
         bool CardExistsInHand(List<Card> hand, Suit suit, Value value)
         {
             return hand.Any(c => c.Suit == suit && c.Value == value);
@@ -929,7 +999,7 @@ namespace Hearts
         {
             List<Card> suits = cardList.Where(c => c.Suit == suit).ToList();
 
-            if(suits.Count > 0) { return true; }
+            if (suits.Count > 0) { return true; }
             else { return false; }
         }
 

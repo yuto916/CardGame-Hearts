@@ -96,6 +96,14 @@
             label4 = new System.Windows.Forms.Label();
             btnExitGame = new System.Windows.Forms.Button();
             btnRestartGame = new System.Windows.Forms.Button();
+            label5 = new System.Windows.Forms.Label();
+            txtPlayer1Score = new System.Windows.Forms.TextBox();
+            txtPlayer2Score = new System.Windows.Forms.TextBox();
+            label6 = new System.Windows.Forms.Label();
+            txtPlayer3Score = new System.Windows.Forms.TextBox();
+            label7 = new System.Windows.Forms.Label();
+            txtPlayer4Score = new System.Windows.Forms.TextBox();
+            label8 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
@@ -774,12 +782,100 @@
             btnRestartGame.UseVisualStyleBackColor = true;
             btnRestartGame.Click += btnRestartGame_Click;
             // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            label5.Location = new System.Drawing.Point(771, 26);
+            label5.Name = "label5";
+            label5.Size = new System.Drawing.Size(79, 23);
+            label5.TabIndex = 67;
+            label5.Text = "Player 1:";
+            // 
+            // txtPlayer1Score
+            // 
+            txtPlayer1Score.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            txtPlayer1Score.Location = new System.Drawing.Point(863, 23);
+            txtPlayer1Score.Name = "txtPlayer1Score";
+            txtPlayer1Score.ReadOnly = true;
+            txtPlayer1Score.Size = new System.Drawing.Size(88, 30);
+            txtPlayer1Score.TabIndex = 68;
+            txtPlayer1Score.Text = "0";
+            // 
+            // txtPlayer2Score
+            // 
+            txtPlayer2Score.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            txtPlayer2Score.Location = new System.Drawing.Point(863, 72);
+            txtPlayer2Score.Name = "txtPlayer2Score";
+            txtPlayer2Score.ReadOnly = true;
+            txtPlayer2Score.Size = new System.Drawing.Size(88, 30);
+            txtPlayer2Score.TabIndex = 70;
+            txtPlayer2Score.Text = "0";
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            label6.Location = new System.Drawing.Point(771, 75);
+            label6.Name = "label6";
+            label6.Size = new System.Drawing.Size(79, 23);
+            label6.TabIndex = 69;
+            label6.Text = "Player 2:";
+            // 
+            // txtPlayer3Score
+            // 
+            txtPlayer3Score.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            txtPlayer3Score.Location = new System.Drawing.Point(863, 117);
+            txtPlayer3Score.Name = "txtPlayer3Score";
+            txtPlayer3Score.ReadOnly = true;
+            txtPlayer3Score.Size = new System.Drawing.Size(88, 30);
+            txtPlayer3Score.TabIndex = 72;
+            txtPlayer3Score.Text = "0";
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            label7.Location = new System.Drawing.Point(771, 120);
+            label7.Name = "label7";
+            label7.Size = new System.Drawing.Size(79, 23);
+            label7.TabIndex = 71;
+            label7.Text = "Player 3:";
+            // 
+            // txtPlayer4Score
+            // 
+            txtPlayer4Score.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            txtPlayer4Score.Location = new System.Drawing.Point(863, 164);
+            txtPlayer4Score.Name = "txtPlayer4Score";
+            txtPlayer4Score.ReadOnly = true;
+            txtPlayer4Score.Size = new System.Drawing.Size(88, 30);
+            txtPlayer4Score.TabIndex = 74;
+            txtPlayer4Score.Text = "0";
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            label8.Location = new System.Drawing.Point(771, 167);
+            label8.Name = "label8";
+            label8.Size = new System.Drawing.Size(79, 23);
+            label8.TabIndex = 73;
+            label8.Text = "Player 4:";
+            // 
             // frmInGame
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             BackColor = System.Drawing.SystemColors.ActiveCaption;
             ClientSize = new System.Drawing.Size(982, 853);
+            Controls.Add(txtPlayer4Score);
+            Controls.Add(label8);
+            Controls.Add(txtPlayer3Score);
+            Controls.Add(label7);
+            Controls.Add(txtPlayer2Score);
+            Controls.Add(label6);
+            Controls.Add(txtPlayer1Score);
+            Controls.Add(label5);
             Controls.Add(btnRestartGame);
             Controls.Add(btnExitGame);
             Controls.Add(label4);
@@ -990,5 +1086,13 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button btnExitGame;
         private System.Windows.Forms.Button btnRestartGame;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox txtPlayer1Score;
+        private System.Windows.Forms.TextBox txtPlayer2Score;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox txtPlayer3Score;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox txtPlayer4Score;
+        private System.Windows.Forms.Label label8;
     }
 }
