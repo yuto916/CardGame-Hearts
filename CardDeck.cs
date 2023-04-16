@@ -113,7 +113,7 @@ namespace Hearts
 
 
     /* ******************************************************** Card  ******************************************************* */
-    public class Card
+    public class Card : IComparable<Card>
     {
         public Suit Suit { get; }
         public Value Value { get; }
@@ -127,6 +127,14 @@ namespace Hearts
         public override string ToString()
         {
             return $"{Value} of {Suit}";
+        }
+
+        public int CompareTo(Card other)
+        {
+            if (other == null) return 1;
+            if (this.Value > other.Value) return 1;
+            if (this.Value < other.Value) return -1;
+            return 0;
         }
     }
     /* ********************************************************************************************************************** */
