@@ -44,8 +44,8 @@ namespace Hearts
         int thirdPlayerScore;
         int fourthPlayerScore;
 
-
-        int playCount = 1;
+        
+        int playCount = 0;
         int gameRound = 1;
 
 
@@ -139,34 +139,14 @@ namespace Hearts
 
             // Game set up
             firstPlayer = DetermineFirstPlayer(player1Hand, player2Hand, player3Hand, player4Hand);
-            secondPlayer = (firstPlayer + 1) % NUM_OF_PLAYERS;
-            thirdPlayer = (secondPlayer + 1) % NUM_OF_PLAYERS;
-            fourthPlayer = (thirdPlayer + 1) % NUM_OF_PLAYERS;
-
-
-            secondPlayer = secondPlayer == 0 ? 4 : secondPlayer;
-            thirdPlayer = thirdPlayer == 0 ? 4 : thirdPlayer;
-            fourthPlayer = fourthPlayer == 0 ? 4 : fourthPlayer;
-
-
-            string firstPlayerPicBoxName = "player" + firstPlayer + "PicBoxPlayCard";
-            string secondPlayerPicBoxName = "player" + secondPlayer + "PicBoxPlayCard";
-            string thirdPlayerPicBoxName = "player" + thirdPlayer + "PicBoxPlayCard";
-            string fourthPlayerPicBoxName = "player" + fourthPlayer + "PicBoxPlayCard";
-
-
-            firstPlayerPicBox = (PictureBox)this.Controls.Find(firstPlayerPicBoxName, true)[0];
-            secondPlayerPicBox = (PictureBox)this.Controls.Find(secondPlayerPicBoxName, true)[0];
-            thirdPlayerPicBox = (PictureBox)this.Controls.Find(thirdPlayerPicBoxName, true)[0];
-            fourthPlayerPicBox = (PictureBox)this.Controls.Find(fourthPlayerPicBoxName, true)[0];
-
-
+            StartRound(firstPlayer);
             UpdateCurrentPlayerLabel(firstPlayer);
             await Task.Delay(2000);
 
 
             MessageBox.Show(firstPlayer.ToString() + secondPlayer.ToString() + thirdPlayer.ToString() + fourthPlayer.ToString());
 
+          
             // Trick 1.1   
             Trick1Play1(firstPlayer, player1Hand, player2Hand, player3Hand, player4Hand);
             UpdateCurrentPlayerLabel(secondPlayer);
@@ -174,7 +154,7 @@ namespace Hearts
 
 
             // Trick 1.2 
-            await Task.Delay(5000);
+            await Task.Delay(3000);
             if (firstPlayerPicBox.Image != null)
             {
                 Trick1Play2(secondPlayer, player1Hand, player2Hand, player3Hand);
@@ -182,9 +162,8 @@ namespace Hearts
                 await Task.Delay(2000);
             }
 
-
             // Trick 1.3
-            await Task.Delay(5000);
+            await Task.Delay(3000);
             if (secondPlayerPicBox.Image != null)
             {
                 Trick1Play3(thirdPlayer, player1Hand, player2Hand, player3Hand);
@@ -192,9 +171,8 @@ namespace Hearts
                 await Task.Delay(2000);
             }
 
-
             // Trick 1.4
-            await Task.Delay(5000);
+            await Task.Delay(3000);
             if (thirdPlayerPicBox.Image != null)
             {
                 Trick1Play4(fourthPlayer, player1Hand, player2Hand, player3Hand);
@@ -202,7 +180,19 @@ namespace Hearts
                 await Task.Delay(2000);
             }
 
-            UpdateScore(cardList);
+
+            firstPlayer = UpdateScore(cardList);
+            StartRound(firstPlayer);
+            UpdateCurrentPlayerLabel(firstPlayer);
+            await Task.Delay(2000);
+
+
+
+            // Trick 2.1
+            await Task.Delay(3000);
+            Trick2Play1(firstPlayer, player1Hand, player2Hand, player3Hand);
+            UpdateCurrentPlayerLabel(secondPlayer);
+            await Task.Delay(2000);
 
         }
 
@@ -232,40 +222,62 @@ namespace Hearts
             string pictureBoxName = pictureBox.Name;
             Card card = pictureBoxCardMap[pictureBox];
 
+            
+            
 
-            leadingCardSuit = cardList[0].Suit;
-
-
+            
             PictureBox targetPictureBox = this.Controls.Find(pictureBoxName, true).FirstOrDefault() as PictureBox;
 
             if (targetPictureBox != null)
             {
                 if (player4PicBoxPlayCard.Image == null)
                 {
-
-
-                    if (SuitExistsInHand(player4Hand, leadingCardSuit))
+                    if(firstPlayer != 4)
                     {
-                        if (card.Suit == leadingCardSuit)
+                        leadingCardSuit = cardList[0].Suit;
+
+                        if (SuitExistsInHand(player4Hand, leadingCardSuit))
+                        {
+                            if (card.Suit == leadingCardSuit)
+                            {
+                                playCard(player4Hand, card.Suit, card.Value, targetPictureBox, player4PicBoxPlayCard);
+                                player4CardPlayedTask.SetResult(card);
+                            }
+                            else
+                            {
+                                MessageBox.Show("You cannot play this card!");
+                            }
+                        }
+                        else if (SuitExistsInHand(player4Hand, leadingCardSuit) == false)
                         {
                             playCard(player4Hand, card.Suit, card.Value, targetPictureBox, player4PicBoxPlayCard);
                             player4CardPlayedTask.SetResult(card);
                         }
+
                         else
                         {
-                            MessageBox.Show("You cannot play this card!");
+                            MessageBox.Show("Wait for your turn!");
                         }
                     }
-                    else if (SuitExistsInHand(player4Hand, leadingCardSuit) == false)
-                    {
-                        playCard(player4Hand, card.Suit, card.Value, targetPictureBox, player4PicBoxPlayCard);
-                        player4CardPlayedTask.SetResult(card);
-                    }
-
                     else
                     {
-                        MessageBox.Show("Wait for your turn!");
+                        if(heartBroken == true)
+                        {
+                            playCard(player4Hand, card.Suit, card.Value, targetPictureBox, player4PicBoxPlayCard);
+                        }
+                        else if (heartBroken == false)
+                        {
+                            if(card.Suit != Suit.Hearts)
+                            {
+                                playCard(player4Hand, card.Suit, card.Value, targetPictureBox, player4PicBoxPlayCard);
+                            }
+                            else
+                            {
+                                MessageBox.Show("You cannot lead with heart until heart is broken!");
+                            }
+                        }
                     }
+                    
                 }
             }
         }
@@ -403,7 +415,7 @@ namespace Hearts
 
 
         // ------------------------------------------------------------------------------------------------------------------------
-        private void UpdateScore(List<Card> cardList)
+        private int UpdateScore(List<Card> cardList)
         {
             Suit leadingSuit = cardList[0].Suit;
             List<Card> leadingSuitCards = cardList.Where(c => c.Suit == leadingSuit).ToList();
@@ -413,37 +425,64 @@ namespace Hearts
 
             // Get the index of the first item in the sorted list
             int highestValueIndex = cardList.IndexOf(leadingSuitCards[0]);
+            Card highestValueCard = leadingSuitCards[0];
 
-
+            MessageBox.Show(highestValueCard.ToString());
             int score = CalculateScore(cardList);
 
 
-            if (highestValueIndex + 1 == firstPlayer)
+            if (highestValueCard == cardList[0])
             {
                 firstPlayerScore += score;
                 txtPlayer1Score.Text = firstPlayerScore.ToString();
+                cardList.Clear();
+                player1PicBoxPlayCard.Image = null;
+                player2PicBoxPlayCard.Image = null;
+                player3PicBoxPlayCard.Image = null;
+                player4PicBoxPlayCard.Image = null;
+                MessageBox.Show("Player " + firstPlayer + "collects " + score + " points");
+                return firstPlayer;
             }
-            else if (highestValueIndex + 1 == secondPlayer)
+            else if (highestValueCard == cardList[1])
             {
                 secondPlayerScore += score;
                 txtPlayer2Score.Text = secondPlayerScore.ToString();
+                cardList.Clear();
+                player1PicBoxPlayCard.Image = null;
+                player2PicBoxPlayCard.Image = null;
+                player3PicBoxPlayCard.Image = null;
+                player4PicBoxPlayCard.Image = null;
+                MessageBox.Show("Player " + secondPlayer + "collects " + score + " points");
+                return secondPlayer;
             }
-            else if (highestValueIndex + 1 == thirdPlayer)
+            else if (highestValueCard == cardList[2])
             {
                 thirdPlayerScore += score;
                 txtPlayer3Score.Text = thirdPlayerScore.ToString();
+                cardList.Clear();
+                player1PicBoxPlayCard.Image = null;
+                player2PicBoxPlayCard.Image = null;
+                player3PicBoxPlayCard.Image = null;
+                player4PicBoxPlayCard.Image = null;
+                MessageBox.Show("Player " + thirdPlayer + "collects " + score + " points");
+                return thirdPlayer;
             }
-            else if (highestValueIndex + 1 == fourthPlayer)
+            else if (highestValueCard == cardList[3])
             {
                 fourthPlayerScore += score;
                 txtPlayer4Score.Text = fourthPlayerScore.ToString();
+                cardList.Clear();
+                player1PicBoxPlayCard.Image = null;
+                player2PicBoxPlayCard.Image = null;
+                player3PicBoxPlayCard.Image = null;
+                player4PicBoxPlayCard.Image = null;
+                MessageBox.Show("Player " + fourthPlayer + "collects " + score + " points");
+                return fourthPlayer;
             }
-
-            cardList.Clear();
-            player1PicBoxPlayCard.Image = null;
-            player2PicBoxPlayCard.Image = null;
-            player3PicBoxPlayCard.Image = null;
-            player4PicBoxPlayCard.Image = null;
+            else
+            {
+                return -1;
+            }
         }
 
 
@@ -465,6 +504,34 @@ namespace Hearts
             score = numberOfHearts + spadeQueenScore;
 
             return score;
+        }
+
+
+
+        private async void StartRound(int firstPlayerNum)
+        {
+            // Round set up
+            firstPlayer = firstPlayerNum;
+            secondPlayer = (firstPlayer + 1) % NUM_OF_PLAYERS;
+            thirdPlayer = (secondPlayer + 1) % NUM_OF_PLAYERS;
+            fourthPlayer = (thirdPlayer + 1) % NUM_OF_PLAYERS;
+
+
+            secondPlayer = secondPlayer == 0 ? 4 : secondPlayer;
+            thirdPlayer = thirdPlayer == 0 ? 4 : thirdPlayer;
+            fourthPlayer = fourthPlayer == 0 ? 4 : fourthPlayer;
+
+
+            string firstPlayerPicBoxName = "player" + firstPlayer + "PicBoxPlayCard";
+            string secondPlayerPicBoxName = "player" + secondPlayer + "PicBoxPlayCard";
+            string thirdPlayerPicBoxName = "player" + thirdPlayer + "PicBoxPlayCard";
+            string fourthPlayerPicBoxName = "player" + fourthPlayer + "PicBoxPlayCard";
+
+
+            firstPlayerPicBox = (PictureBox)this.Controls.Find(firstPlayerPicBoxName, true)[0];
+            secondPlayerPicBox = (PictureBox)this.Controls.Find(secondPlayerPicBoxName, true)[0];
+            thirdPlayerPicBox = (PictureBox)this.Controls.Find(thirdPlayerPicBoxName, true)[0];
+            fourthPlayerPicBox = (PictureBox)this.Controls.Find(fourthPlayerPicBoxName, true)[0];
         }
         /* ********************************************************************************************************************** */
 
@@ -514,17 +581,14 @@ namespace Hearts
             if (playerNum == 1)
             {
                 playCard(player1Hand, Suit.Clubs, Value.Two, player1PicBox13, player1PicBoxPlayCard);
-                playCount++;
             }
             else if (playerNum == 2)
             {
                 playCard(player2Hand, Suit.Clubs, Value.Two, player2PicBox13, player2PicBoxPlayCard);
-                playCount++;
             }
             else if (playerNum == 3)
             {
                 playCard(player3Hand, Suit.Clubs, Value.Two, player3PicBox13, player3PicBoxPlayCard);
-                playCount++;
             }
             else if (playerNum == 4)
             {
@@ -533,8 +597,9 @@ namespace Hearts
                 PictureBox picBoxToRemove = (PictureBox)this.Controls.Find(controlName, true)[0];
 
                 playCard(player4Hand, Suit.Clubs, Value.Two, picBoxToRemove, player4PicBoxPlayCard);
-                playCount++;
+                
             }
+            playCount++;
         }
 
 
@@ -561,6 +626,7 @@ namespace Hearts
                 else if (SuitExistsInHand(player1Hand, Suit.Hearts))
                 {
                     SuitExistsPlayBiggest(player1Hand, Suit.Hearts, player1PicBox13, player1PicBoxPlayCard);
+                    heartBroken = true;
                 }
 
                 else if (SuitExistsInHand(player1Hand, Suit.Spades))
@@ -592,6 +658,7 @@ namespace Hearts
                 else if (SuitExistsInHand(player2Hand, Suit.Hearts))
                 {
                     SuitExistsPlayBiggest(player2Hand, Suit.Hearts, player2PicBox13, player2PicBoxPlayCard);
+                    heartBroken = true;
                 }
 
                 else if (SuitExistsInHand(player2Hand, Suit.Spades))
@@ -622,6 +689,7 @@ namespace Hearts
                 else if (SuitExistsInHand(player3Hand, Suit.Hearts))
                 {
                     SuitExistsPlayBiggest(player3Hand, Suit.Hearts, player3PicBox13, player3PicBoxPlayCard);
+                    heartBroken = true;
                 }
 
                 else if (SuitExistsInHand(player3Hand, Suit.Spades))
@@ -642,6 +710,7 @@ namespace Hearts
                     await Task.Delay(100);
                 }
             }
+            playCount++;
         }
 
 
@@ -669,6 +738,7 @@ namespace Hearts
                 else if (SuitExistsInHand(player1Hand, Suit.Hearts))
                 {
                     SuitExistsPlayBiggest(player1Hand, Suit.Hearts, player1PicBox13, player1PicBoxPlayCard);
+                    heartBroken = true;
                 }
 
                 else if (SuitExistsInHand(player1Hand, Suit.Spades))
@@ -700,6 +770,7 @@ namespace Hearts
                 else if (SuitExistsInHand(player2Hand, Suit.Hearts))
                 {
                     SuitExistsPlayBiggest(player2Hand, Suit.Hearts, player2PicBox13, player2PicBoxPlayCard);
+                    heartBroken = true;
                 }
 
                 else if (SuitExistsInHand(player2Hand, Suit.Spades))
@@ -730,6 +801,7 @@ namespace Hearts
                 else if (SuitExistsInHand(player3Hand, Suit.Hearts))
                 {
                     SuitExistsPlayBiggest(player3Hand, Suit.Hearts, player3PicBox13, player3PicBoxPlayCard);
+                    heartBroken = true;
                 }
 
                 else if (SuitExistsInHand(player3Hand, Suit.Spades))
@@ -750,6 +822,7 @@ namespace Hearts
                     await Task.Delay(100);
                 }
             }
+            playCount++;
         }
 
 
@@ -784,6 +857,7 @@ namespace Hearts
                         if (SuitExistsInHand(player1Hand, Suit.Hearts))
                         {
                             SuitExistsPlayBiggest(player1Hand, Suit.Hearts, player1PicBox13, player1PicBoxPlayCard);
+                            heartBroken = true;
                         }
                         else
                         {
@@ -826,6 +900,7 @@ namespace Hearts
                         if (SuitExistsInHand(player2Hand, Suit.Hearts))
                         {
                             SuitExistsPlayBiggest(player2Hand, Suit.Hearts, player2PicBox13, player2PicBoxPlayCard);
+                            heartBroken = true;
                         }
                         else
                         {
@@ -867,6 +942,7 @@ namespace Hearts
                         if (SuitExistsInHand(player3Hand, Suit.Hearts))
                         {
                             SuitExistsPlayBiggest(player3Hand, Suit.Hearts, player3PicBox13, player3PicBoxPlayCard);
+                            heartBroken = true;
                         }
                         else
                         {
@@ -891,6 +967,97 @@ namespace Hearts
                     await Task.Delay(100);
                 }
             }
+            playCount++;
+        }
+
+
+
+        // ------------------------------------------------------------------------------------------------------------------------
+        private async void Trick2Play1(int playerNum, List<Card> player1Hand, List<Card> player2Hand, List<Card> player3Hand)
+        {
+            if (playerNum == 1)
+            {
+                int numberOfHearts = player1Hand.Count(card => card.Suit == Suit.Hearts);
+                int numberOfDiamonds = player1Hand.Count(card => card.Suit == Suit.Diamonds);
+                int numberOfClubs = player1Hand.Count(card => card.Suit == Suit.Clubs);
+                int numberOfSpades = player1Hand.Count(card => card.Suit == Suit.Spades);
+
+                if (heartBroken == true)
+                {
+                    int[] suitCounts = new int[4] { numberOfHearts, numberOfDiamonds, numberOfClubs, numberOfSpades };
+                    int minSuitIndex = Array.IndexOf(suitCounts, suitCounts.Where(c => c > 0).Min());
+                    Suit minSuit = (Suit)minSuitIndex;
+
+                    SuitExistsPlayMiddle(player1Hand, minSuit, player1PicBox12, player1PicBoxPlayCard);
+                }
+                else
+                {
+                    int[] suitCounts = new int[3] { numberOfDiamonds, numberOfClubs, numberOfSpades };
+                    int minSuitIndex = Array.IndexOf(suitCounts, suitCounts.Where(c => c > 0).Min());
+                    Suit minSuit = (Suit)minSuitIndex;
+
+                    SuitExistsPlayMiddle(player1Hand, minSuit, player1PicBox12, player1PicBoxPlayCard);
+                }
+            }
+
+            else if (playerNum == 2)
+            {
+                int numberOfHearts = player2Hand.Count(card => card.Suit == Suit.Hearts);
+                int numberOfDiamonds = player2Hand.Count(card => card.Suit == Suit.Diamonds);
+                int numberOfClubs = player2Hand.Count(card => card.Suit == Suit.Clubs);
+                int numberOfSpades = player2Hand.Count(card => card.Suit == Suit.Spades);
+
+                if (heartBroken == true)
+                {
+                    int[] suitCounts = new int[4] { numberOfHearts, numberOfDiamonds, numberOfClubs, numberOfSpades };
+                    int minSuitIndex = Array.IndexOf(suitCounts, suitCounts.Where(c => c > 0).Min());
+                    Suit minSuit = (Suit)minSuitIndex;
+
+                    SuitExistsPlayMiddle(player2Hand, minSuit, player2PicBox12, player2PicBoxPlayCard);
+                }
+                else
+                {
+                    int[] suitCounts = new int[3] { numberOfDiamonds, numberOfClubs, numberOfSpades };
+                    int minSuitIndex = Array.IndexOf(suitCounts, suitCounts.Where(c => c > 0).Min());
+                    Suit minSuit = (Suit)minSuitIndex;
+
+                    SuitExistsPlayMiddle(player2Hand, minSuit, player2PicBox12, player2PicBoxPlayCard);
+                }
+            }
+
+            else if (playerNum == 3)
+            {
+                int numberOfHearts = player3Hand.Count(card => card.Suit == Suit.Hearts);
+                int numberOfDiamonds = player3Hand.Count(card => card.Suit == Suit.Diamonds);
+                int numberOfClubs = player3Hand.Count(card => card.Suit == Suit.Clubs);
+                int numberOfSpades = player3Hand.Count(card => card.Suit == Suit.Spades);
+
+                if (heartBroken == true)
+                {
+                    int[] suitCounts = new int[4] { numberOfHearts, numberOfDiamonds, numberOfClubs, numberOfSpades };
+                    int minSuitIndex = Array.IndexOf(suitCounts, suitCounts.Where(c => c > 0).Min());
+                    Suit minSuit = (Suit)minSuitIndex;
+
+                    SuitExistsPlayMiddle(player3Hand, minSuit, player3PicBox12, player3PicBoxPlayCard);
+                }
+                else
+                {
+                    int[] suitCounts = new int[3] { numberOfDiamonds, numberOfClubs, numberOfSpades };
+                    int minSuitIndex = Array.IndexOf(suitCounts, suitCounts.Where(c => c > 0).Min());
+                    Suit minSuit = (Suit)minSuitIndex;
+
+                    SuitExistsPlayMiddle(player3Hand, minSuit, player3PicBox12, player3PicBoxPlayCard);
+                }
+            }
+
+            else if (playerNum == 4)
+            {
+                while (!player4CardPlayedTask.Task.IsCompleted)
+                {
+                    await Task.Delay(100);
+                }
+            }
+            playCount++;
         }
         /* ********************************************************************************************************************** */
 

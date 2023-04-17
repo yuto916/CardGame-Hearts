@@ -16,8 +16,7 @@ namespace Hearts
 
     public enum Value
     {
-        Ace = 1,
-        Two,
+        Two = 2,
         Three,
         Four,
         Five,
@@ -28,7 +27,8 @@ namespace Hearts
         Ten,
         Jack,
         Queen,
-        King
+        King,
+        Ace
     }
 
 
