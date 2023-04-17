@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.Intrinsics.X86;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
@@ -16,7 +17,16 @@ namespace Hearts
     public partial class frmInGame : Form
     {
         /* ***************************************************** Declare **************************************************** */
-        private TaskCompletionSource<Card> player4CardPlayedTask = new TaskCompletionSource<Card>();
+        private TaskCompletionSource<Card> player4CardPlayedTask1 = new TaskCompletionSource<Card>();
+        private TaskCompletionSource<Card> player4CardPlayedTask2 = new TaskCompletionSource<Card>();
+        private TaskCompletionSource<Card> player4CardPlayedTask3 = new TaskCompletionSource<Card>();
+        private TaskCompletionSource<Card> player4CardPlayedTask4 = new TaskCompletionSource<Card>();
+        private TaskCompletionSource<Card> player4CardPlayedTask5 = new TaskCompletionSource<Card>();
+        private TaskCompletionSource<Card> player4CardPlayedTask6 = new TaskCompletionSource<Card>();
+        private TaskCompletionSource<Card> player4CardPlayedTask7 = new TaskCompletionSource<Card>();
+        private TaskCompletionSource<Card> player4CardPlayedTask8 = new TaskCompletionSource<Card>();
+        private TaskCompletionSource<Card> player4CardPlayedTask9 = new TaskCompletionSource<Card>();
+        private TaskCompletionSource<Card> player4CardPlayedTask10 = new TaskCompletionSource<Card>();
 
         private Dictionary<PictureBox, Card> pictureBoxCardMap = new Dictionary<PictureBox, Card>();
         private List<Card> player1Hand;
@@ -46,7 +56,7 @@ namespace Hearts
 
         
         int playCount = 0;
-        int gameRound = 1;
+        int round = 1;
 
 
         List<Card> cardList = new List<Card>(4);
@@ -141,58 +151,139 @@ namespace Hearts
             firstPlayer = DetermineFirstPlayer(player1Hand, player2Hand, player3Hand, player4Hand);
             StartRound(firstPlayer);
             UpdateCurrentPlayerLabel(firstPlayer);
-            await Task.Delay(2000);
+            await Task.Delay(1000);
 
 
-            MessageBox.Show(firstPlayer.ToString() + secondPlayer.ToString() + thirdPlayer.ToString() + fourthPlayer.ToString());
+            MessageBox.Show(heartBroken.ToString());
 
-          
+            /* ----------------------------------------- Trick 1 ----------------------------------------- */
             // Trick 1.1   
             Trick1Play1(firstPlayer, player1Hand, player2Hand, player3Hand, player4Hand);
             UpdateCurrentPlayerLabel(secondPlayer);
-            await Task.Delay(2000);
+            await Task.Delay(1000);
 
 
             // Trick 1.2 
-            await Task.Delay(3000);
+            if (firstPlayer == 4) { await Task.Delay(3000); }
             if (firstPlayerPicBox.Image != null)
             {
                 Trick1Play2(secondPlayer, player1Hand, player2Hand, player3Hand);
                 UpdateCurrentPlayerLabel(thirdPlayer);
-                await Task.Delay(2000);
+                await Task.Delay(1000);
             }
 
             // Trick 1.3
-            await Task.Delay(3000);
+            if (secondPlayer == 4) { await Task.Delay(3000); }
             if (secondPlayerPicBox.Image != null)
             {
                 Trick1Play3(thirdPlayer, player1Hand, player2Hand, player3Hand);
                 UpdateCurrentPlayerLabel(fourthPlayer);
-                await Task.Delay(2000);
+                await Task.Delay(1000);
             }
 
             // Trick 1.4
-            await Task.Delay(3000);
+            if (thirdPlayer == 4) { await Task.Delay(3000); }
             if (thirdPlayerPicBox.Image != null)
             {
                 Trick1Play4(fourthPlayer, player1Hand, player2Hand, player3Hand);
                 UpdateCurrentPlayerLabel(firstPlayer);
-                await Task.Delay(2000);
+                await Task.Delay(1000);
             }
+            /* ------------------------------------------------------------------------------------------- */
 
 
             firstPlayer = UpdateScore(cardList);
             StartRound(firstPlayer);
             UpdateCurrentPlayerLabel(firstPlayer);
+            round++;
             await Task.Delay(2000);
 
 
-
+            MessageBox.Show(heartBroken.ToString());
+            /* ----------------------------------------- Trick 2 ----------------------------------------- */
             // Trick 2.1
-            await Task.Delay(3000);
             Trick2Play1(firstPlayer, player1Hand, player2Hand, player3Hand);
             UpdateCurrentPlayerLabel(secondPlayer);
             await Task.Delay(2000);
+
+
+            // Trick 2.2 
+            if (firstPlayer == 4) { await Task.Delay(3000); }
+            if (firstPlayerPicBox.Image != null)
+            {
+                Trick2Play2(secondPlayer, player1Hand, player2Hand, player3Hand);
+                UpdateCurrentPlayerLabel(thirdPlayer);
+                await Task.Delay(1000);
+            }
+
+            // Trick 2.3
+            if (secondPlayer == 4) { await Task.Delay(3000); }
+            if (secondPlayerPicBox.Image != null)
+            {
+                Trick2Play34(thirdPlayer, player1Hand, player2Hand, player3Hand);
+                UpdateCurrentPlayerLabel(fourthPlayer);
+                await Task.Delay(1000);
+            }
+
+            // Trick 2.4
+            if (thirdPlayer == 4) { await Task.Delay(3000); }
+            if (thirdPlayerPicBox.Image != null)
+            {
+                Trick2Play34(fourthPlayer, player1Hand, player2Hand, player3Hand);
+                UpdateCurrentPlayerLabel(firstPlayer);
+                await Task.Delay(1000);
+            }
+            /* ------------------------------------------------------------------------------------------- */
+
+
+            firstPlayer = UpdateScore(cardList);
+            StartRound(firstPlayer);
+            UpdateCurrentPlayerLabel(firstPlayer);
+            round++;
+            await Task.Delay(2000);
+
+            MessageBox.Show(heartBroken.ToString());
+            /* ----------------------------------------- Trick 3 ----------------------------------------- */
+            // Trick 3.1
+            Trick2Play1(firstPlayer, player1Hand, player2Hand, player3Hand);
+            UpdateCurrentPlayerLabel(secondPlayer);
+            await Task.Delay(2000);
+
+
+            // Trick 3.2 
+            if (firstPlayer == 4) { await Task.Delay(3000); }
+            if (firstPlayerPicBox.Image != null)
+            {
+                Trick2Play2(secondPlayer, player1Hand, player2Hand, player3Hand);
+                UpdateCurrentPlayerLabel(thirdPlayer);
+                await Task.Delay(1000);
+            }
+
+            // Trick 3.3
+            if (secondPlayer == 4) { await Task.Delay(3000); }
+            if (secondPlayerPicBox.Image != null)
+            {
+                Trick2Play34(thirdPlayer, player1Hand, player2Hand, player3Hand);
+                UpdateCurrentPlayerLabel(fourthPlayer);
+                await Task.Delay(1000);
+            }
+
+            // Trick 3.4
+            if (thirdPlayer == 4) { await Task.Delay(3000); }
+            if (thirdPlayerPicBox.Image != null)
+            {
+                Trick2Play34(fourthPlayer, player1Hand, player2Hand, player3Hand);
+                UpdateCurrentPlayerLabel(firstPlayer);
+                await Task.Delay(1000);
+            }
+            /* ------------------------------------------------------------------------------------------- */
+
+            firstPlayer = UpdateScore(cardList);
+            StartRound(firstPlayer);
+            UpdateCurrentPlayerLabel(firstPlayer);
+            round++;
+            await Task.Delay(2000);
+
 
         }
 
@@ -241,7 +332,14 @@ namespace Hearts
                             if (card.Suit == leadingCardSuit)
                             {
                                 playCard(player4Hand, card.Suit, card.Value, targetPictureBox, player4PicBoxPlayCard);
-                                player4CardPlayedTask.SetResult(card);
+                                if (card.Suit == Suit.Hearts)
+                                {
+                                    heartBroken = true;
+                                }
+
+                                if (round == 1) { player4CardPlayedTask1.SetResult(card);}
+                                else if (round == 2) { player4CardPlayedTask2.SetResult(card); }
+                                else if (round == 3) { player4CardPlayedTask3.SetResult(card); }
                             }
                             else
                             {
@@ -251,7 +349,14 @@ namespace Hearts
                         else if (SuitExistsInHand(player4Hand, leadingCardSuit) == false)
                         {
                             playCard(player4Hand, card.Suit, card.Value, targetPictureBox, player4PicBoxPlayCard);
-                            player4CardPlayedTask.SetResult(card);
+                            if (card.Suit == Suit.Hearts)
+                            {
+                                heartBroken = true;
+                            }
+
+                            if(round == 1) { player4CardPlayedTask1.SetResult(card); }
+                            else if (round == 2) { player4CardPlayedTask2.SetResult(card); }
+                            else if (round == 3) { player4CardPlayedTask3.SetResult(card); }
                         }
 
                         else
@@ -434,7 +539,14 @@ namespace Hearts
             if (highestValueCard == cardList[0])
             {
                 firstPlayerScore += score;
-                txtPlayer1Score.Text = firstPlayerScore.ToString();
+
+                string firstPlayerScoreText = "txtPlayer" + firstPlayer + "Score";
+                TextBox textBox = this.Controls.Find(firstPlayerScoreText, true).FirstOrDefault() as TextBox;
+                if (textBox != null)
+                {
+                    textBox.Text = firstPlayerScore.ToString();
+                }
+
                 cardList.Clear();
                 player1PicBoxPlayCard.Image = null;
                 player2PicBoxPlayCard.Image = null;
@@ -446,7 +558,14 @@ namespace Hearts
             else if (highestValueCard == cardList[1])
             {
                 secondPlayerScore += score;
-                txtPlayer2Score.Text = secondPlayerScore.ToString();
+
+                string secondPlayerScoreText = "txtPlayer" + secondPlayer + "Score";
+                TextBox textBox = this.Controls.Find(secondPlayerScoreText, true).FirstOrDefault() as TextBox;
+                if (textBox != null)
+                {
+                    textBox.Text = secondPlayerScore.ToString();
+                }
+
                 cardList.Clear();
                 player1PicBoxPlayCard.Image = null;
                 player2PicBoxPlayCard.Image = null;
@@ -458,7 +577,14 @@ namespace Hearts
             else if (highestValueCard == cardList[2])
             {
                 thirdPlayerScore += score;
-                txtPlayer3Score.Text = thirdPlayerScore.ToString();
+
+                string thirdPlayerScoreText = "txtPlayer" + thirdPlayer + "Score";
+                TextBox textBox = this.Controls.Find(thirdPlayerScoreText, true).FirstOrDefault() as TextBox;
+                if (textBox != null)
+                {
+                    textBox.Text = thirdPlayerScore.ToString();
+                }
+
                 cardList.Clear();
                 player1PicBoxPlayCard.Image = null;
                 player2PicBoxPlayCard.Image = null;
@@ -470,7 +596,14 @@ namespace Hearts
             else if (highestValueCard == cardList[3])
             {
                 fourthPlayerScore += score;
-                txtPlayer4Score.Text = fourthPlayerScore.ToString();
+
+                string fourthPlayerScoreText = "txtPlayer" + fourthPlayer + "Score";
+                TextBox textBox = this.Controls.Find(fourthPlayerScoreText, true).FirstOrDefault() as TextBox;
+                if (textBox != null)
+                {
+                    textBox.Text = fourthPlayerScore.ToString();
+                }
+
                 cardList.Clear();
                 player1PicBoxPlayCard.Image = null;
                 player2PicBoxPlayCard.Image = null;
@@ -705,7 +838,7 @@ namespace Hearts
 
             else if (playerNum == 4)
             {
-                while (!player4CardPlayedTask.Task.IsCompleted)
+                while (!player4CardPlayedTask1.Task.IsCompleted)
                 {
                     await Task.Delay(100);
                 }
@@ -817,7 +950,7 @@ namespace Hearts
 
             else if (playerNum == 4)
             {
-                while (!player4CardPlayedTask.Task.IsCompleted)
+                while (!player4CardPlayedTask1.Task.IsCompleted)
                 {
                     await Task.Delay(100);
                 }
@@ -962,7 +1095,7 @@ namespace Hearts
 
             else if (playerNum == 4)
             {
-                while (!player4CardPlayedTask.Task.IsCompleted)
+                while (!player4CardPlayedTask1.Task.IsCompleted)
                 {
                     await Task.Delay(100);
                 }
@@ -992,11 +1125,11 @@ namespace Hearts
                 }
                 else
                 {
-                    int[] suitCounts = new int[3] { numberOfDiamonds, numberOfClubs, numberOfSpades };
-                    int minSuitIndex = Array.IndexOf(suitCounts, suitCounts.Where(c => c > 0).Min());
-                    Suit minSuit = (Suit)minSuitIndex;
+                    List<Card> noHearts = player1Hand.Where(c => c.Suit != Suit.Hearts).ToList();
+                    noHearts.Sort((x, y) => x.Value.CompareTo(y.Value));
+                    Card smallestCard = noHearts.FirstOrDefault();
 
-                    SuitExistsPlayMiddle(player1Hand, minSuit, player1PicBox12, player1PicBoxPlayCard);
+                    SuitExistsPlayMiddle(player1Hand, smallestCard.Suit, player1PicBox12, player1PicBoxPlayCard);
                 }
             }
 
@@ -1017,11 +1150,11 @@ namespace Hearts
                 }
                 else
                 {
-                    int[] suitCounts = new int[3] { numberOfDiamonds, numberOfClubs, numberOfSpades };
-                    int minSuitIndex = Array.IndexOf(suitCounts, suitCounts.Where(c => c > 0).Min());
-                    Suit minSuit = (Suit)minSuitIndex;
+                    List<Card> noHearts = player2Hand.Where(c => c.Suit != Suit.Hearts).ToList();
+                    noHearts.Sort((x, y) => x.Value.CompareTo(y.Value));
+                    Card smallestCard = noHearts.FirstOrDefault();
 
-                    SuitExistsPlayMiddle(player2Hand, minSuit, player2PicBox12, player2PicBoxPlayCard);
+                    SuitExistsPlayMiddle(player2Hand, smallestCard.Suit, player2PicBox12, player2PicBoxPlayCard);
                 }
             }
 
@@ -1042,24 +1175,552 @@ namespace Hearts
                 }
                 else
                 {
-                    int[] suitCounts = new int[3] { numberOfDiamonds, numberOfClubs, numberOfSpades };
-                    int minSuitIndex = Array.IndexOf(suitCounts, suitCounts.Where(c => c > 0).Min());
-                    Suit minSuit = (Suit)minSuitIndex;
+                    List<Card> noHearts = player3Hand.Where(c => c.Suit != Suit.Hearts).ToList();
+                    noHearts.Sort((x, y) => x.Value.CompareTo(y.Value));
+                    Card smallestCard = noHearts.FirstOrDefault();
 
-                    SuitExistsPlayMiddle(player3Hand, minSuit, player3PicBox12, player3PicBoxPlayCard);
+                    SuitExistsPlayMiddle(player3Hand, smallestCard.Suit, player3PicBox12, player3PicBoxPlayCard);
                 }
             }
 
             else if (playerNum == 4)
             {
-                while (!player4CardPlayedTask.Task.IsCompleted)
+                if (round == 2)
                 {
-                    await Task.Delay(100);
+                    while (!player4CardPlayedTask2.Task.IsCompleted)
+                    {
+                        await Task.Delay(100);
+                    }
+                }
+                else if (round == 3)
+                {
+                    while (!player4CardPlayedTask3.Task.IsCompleted)
+                    {
+                        await Task.Delay(100);
+                    }
+                }
+                else if (round == 4)
+                {
+                    while (!player4CardPlayedTask4.Task.IsCompleted)
+                    {
+                        await Task.Delay(100);
+                    }
+                }
+                else if (round == 5)
+                {
+                    while (!player4CardPlayedTask5.Task.IsCompleted)
+                    {
+                        await Task.Delay(100);
+                    }
                 }
             }
             playCount++;
         }
-        /* ********************************************************************************************************************** */
+
+
+
+        // ------------------------------------------------------------------------------------------------------------------------
+        private async void Trick2Play2(int playerNum, List<Card> player1Hand, List<Card> player2Hand, List<Card> player3Hand)
+        {
+            leadingCardSuit = cardList[0].Suit;
+            leadingCardValue = cardList[0].Value;
+
+            if (playerNum == 1)
+            {
+                if (SuitExistsInCardList(cardList, Suit.Hearts) == true)
+                {
+                    if (SuitExistsInHand(player1Hand, Suit.Hearts))
+                    {
+                        SuitExistsPlayMiddle(player1Hand, Suit.Hearts, player1PicBox12, player1PicBoxPlayCard);
+                        heartBroken = true;
+                    }
+                    else
+                    {
+                        if (CardExistsInHand(player1Hand, Suit.Spades, Value.Queen))
+                        {
+                            playCard(player1Hand, Suit.Spades, Value.Queen, player1PicBox12, player1PicBoxPlayCard);
+                        }
+                        else
+                        {
+                            if (SuitExistsInHand(player1Hand, Suit.Clubs))
+                            {
+                                SuitExistsPlayBiggest(player1Hand, Suit.Clubs, player1PicBox12, player1PicBoxPlayCard);
+                            }
+                            else if (SuitExistsInHand(player1Hand, Suit.Spades))
+                            {
+                                SuitExistsPlayBiggest(player1Hand, Suit.Spades, player1PicBox12, player1PicBoxPlayCard);
+                            }
+                            else if (SuitExistsInHand(player1Hand, Suit.Diamonds))
+                            {
+                                SuitExistsPlayBiggest(player1Hand, Suit.Diamonds, player1PicBox12, player1PicBoxPlayCard);
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    if(SuitExistsInCardList(cardList, leadingCardSuit) == true)
+                    {
+                        SuitExistsPlayBiggestLess(player1Hand, leadingCardSuit, player1PicBox12, player1PicBoxPlayCard);
+                    }
+                    else
+                    {
+                        if (CardExistsInHand(player1Hand, Suit.Spades, Value.Queen))
+                        {
+                            playCard(player1Hand, Suit.Spades, Value.Queen, player1PicBox12, player1PicBoxPlayCard);
+                        }
+                        else
+                        {
+                            if(SuitExistsInHand(player1Hand, Suit.Hearts))
+                            {
+                                SuitExistsPlayBiggest(player1Hand, Suit.Hearts, player1PicBox12, player1PicBoxPlayCard);
+                                heartBroken = true;
+                            }
+                            else
+                            {
+                                if (SuitExistsInHand(player1Hand, Suit.Clubs))
+                                {
+                                    SuitExistsPlayBiggest(player1Hand, Suit.Clubs, player1PicBox12, player1PicBoxPlayCard);
+                                }
+                                else if (SuitExistsInHand(player1Hand, Suit.Spades))
+                                {
+                                    SuitExistsPlayBiggest(player1Hand, Suit.Spades, player1PicBox12, player1PicBoxPlayCard);
+                                }
+                                else if (SuitExistsInHand(player1Hand, Suit.Diamonds))
+                                {
+                                    SuitExistsPlayBiggest(player1Hand, Suit.Diamonds, player1PicBox12, player1PicBoxPlayCard);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            else if (playerNum == 2)
+            {
+                if (SuitExistsInCardList(cardList, Suit.Hearts) == true)
+                {
+                    if (SuitExistsInHand(player2Hand, Suit.Hearts))
+                    {
+                        SuitExistsPlayMiddle(player2Hand, Suit.Hearts, player2PicBox12, player2PicBoxPlayCard);
+                        heartBroken = true;
+                    }
+                    else
+                    {
+                        if (CardExistsInHand(player2Hand, Suit.Spades, Value.Queen))
+                        {
+                            playCard(player2Hand, Suit.Spades, Value.Queen, player2PicBox12, player2PicBoxPlayCard);
+                        }
+                        else
+                        {
+                            if (SuitExistsInHand(player2Hand, Suit.Clubs))
+                            {
+                                SuitExistsPlayBiggest(player2Hand, Suit.Clubs, player2PicBox12, player2PicBoxPlayCard);
+                            }
+                            else if (SuitExistsInHand(player2Hand, Suit.Spades))
+                            {
+                                SuitExistsPlayBiggest(player2Hand, Suit.Spades, player2PicBox12, player2PicBoxPlayCard);
+                            }
+                            else if (SuitExistsInHand(player2Hand, Suit.Diamonds))
+                            {
+                                SuitExistsPlayBiggest(player2Hand, Suit.Diamonds, player2PicBox12, player2PicBoxPlayCard);
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    if (SuitExistsInCardList(cardList, leadingCardSuit) == true)
+                    {
+                        SuitExistsPlayBiggestLess(player2Hand, leadingCardSuit, player2PicBox12, player2PicBoxPlayCard);
+                    }
+                    else
+                    {
+                        if (CardExistsInHand(player2Hand, Suit.Spades, Value.Queen))
+                        {
+                            playCard(player2Hand, Suit.Spades, Value.Queen, player2PicBox12, player2PicBoxPlayCard);
+                        }
+                        else
+                        {
+                            if (SuitExistsInHand(player2Hand, Suit.Hearts))
+                            {
+                                SuitExistsPlayBiggest(player2Hand, Suit.Hearts, player2PicBox12, player2PicBoxPlayCard);
+                                heartBroken = true;
+                            }
+                            else
+                            {
+                                if (SuitExistsInHand(player2Hand, Suit.Clubs))
+                                {
+                                    SuitExistsPlayBiggest(player2Hand, Suit.Clubs, player2PicBox12, player2PicBoxPlayCard);
+                                }
+                                else if (SuitExistsInHand(player2Hand, Suit.Spades))
+                                {
+                                    SuitExistsPlayBiggest(player2Hand, Suit.Spades, player2PicBox12, player2PicBoxPlayCard);
+                                }
+                                else if (SuitExistsInHand(player2Hand, Suit.Diamonds))
+                                {
+                                    SuitExistsPlayBiggest(player2Hand, Suit.Diamonds, player2PicBox12, player2PicBoxPlayCard);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            else if (playerNum == 3)
+            {
+                if (SuitExistsInCardList(cardList, Suit.Hearts) == true)
+                {
+                    if (SuitExistsInHand(player3Hand, Suit.Hearts))
+                    {
+                        SuitExistsPlayMiddle(player3Hand, Suit.Hearts, player3PicBox12, player3PicBoxPlayCard);
+                        heartBroken = true;
+                    }
+                    else
+                    {
+                        if (CardExistsInHand(player3Hand, Suit.Spades, Value.Queen))
+                        {
+                            playCard(player3Hand, Suit.Spades, Value.Queen, player3PicBox12, player3PicBoxPlayCard);
+                        }
+                        else
+                        {
+                            if (SuitExistsInHand(player3Hand, Suit.Clubs))
+                            {
+                                SuitExistsPlayBiggest(player3Hand, Suit.Clubs, player3PicBox12, player3PicBoxPlayCard);
+                            }
+                            else if (SuitExistsInHand(player3Hand, Suit.Spades))
+                            {
+                                SuitExistsPlayBiggest(player3Hand, Suit.Spades, player3PicBox12, player3PicBoxPlayCard);
+                            }
+                            else if (SuitExistsInHand(player3Hand, Suit.Diamonds))
+                            {
+                                SuitExistsPlayBiggest(player3Hand, Suit.Diamonds, player3PicBox12, player3PicBoxPlayCard);
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    if (SuitExistsInCardList(cardList, leadingCardSuit) == true)
+                    {
+                        SuitExistsPlayBiggestLess(player3Hand, leadingCardSuit, player3PicBox12, player3PicBoxPlayCard);
+                    }
+                    else
+                    {
+                        if (CardExistsInHand(player3Hand, Suit.Spades, Value.Queen))
+                        {
+                            playCard(player3Hand, Suit.Spades, Value.Queen, player3PicBox12, player3PicBoxPlayCard);
+                        }
+                        else
+                        {
+                            if (SuitExistsInHand(player3Hand, Suit.Hearts))
+                            {
+                                SuitExistsPlayBiggest(player3Hand, Suit.Hearts, player3PicBox12, player3PicBoxPlayCard);
+                                heartBroken = true;
+                            }
+                            else
+                            {
+                                if (SuitExistsInHand(player3Hand, Suit.Clubs))
+                                {
+                                    SuitExistsPlayBiggest(player3Hand, Suit.Clubs, player3PicBox12, player3PicBoxPlayCard);
+                                }
+                                else if (SuitExistsInHand(player3Hand, Suit.Spades))
+                                {
+                                    SuitExistsPlayBiggest(player3Hand, Suit.Spades, player3PicBox12, player3PicBoxPlayCard);
+                                }
+                                else if (SuitExistsInHand(player3Hand, Suit.Diamonds))
+                                {
+                                    SuitExistsPlayBiggest(player3Hand, Suit.Diamonds, player3PicBox12, player3PicBoxPlayCard);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            else if (playerNum == 4)
+            {
+                if(round == 2)
+                {
+                    while (!player4CardPlayedTask2.Task.IsCompleted)
+                    {
+                        await Task.Delay(100);
+                    }
+                }
+                else if(round == 3)
+                {
+                    while (!player4CardPlayedTask3.Task.IsCompleted)
+                    {
+                        await Task.Delay(100);
+                    }
+                }
+                else if (round == 4)
+                {
+                    while (!player4CardPlayedTask4.Task.IsCompleted)
+                    {
+                        await Task.Delay(100);
+                    }
+                }
+                else if (round == 5)
+                {
+                    while (!player4CardPlayedTask5.Task.IsCompleted)
+                    {
+                        await Task.Delay(100);
+                    }
+                }
+            }
+            playCount++;
+        }
+
+
+
+        // ------------------------------------------------------------------------------------------------------------------------
+        private async void Trick2Play34(int playerNum, List<Card> player1Hand, List<Card> player2Hand, List<Card> player3Hand)
+        {
+            leadingCardSuit = cardList[0].Suit;
+            leadingCardValue = cardList[0].Value;
+
+            if (playerNum == 1)
+            {
+                if (SuitExistsInCardList(cardList, Suit.Hearts) == true)
+                {
+                    if (SuitExistsInHand(player1Hand, Suit.Hearts))
+                    {
+                        SuitExistsPlayBiggestLess(player1Hand, Suit.Hearts, player1PicBox12, player1PicBoxPlayCard);
+                    }
+                    else
+                    {
+                        if (CardExistsInHand(player1Hand, Suit.Spades, Value.Queen))
+                        {
+                            playCard(player1Hand, Suit.Spades, Value.Queen, player1PicBox12, player1PicBoxPlayCard);
+                        }
+                        else
+                        {
+                            if (SuitExistsInHand(player1Hand, Suit.Clubs))
+                            {
+                                SuitExistsPlayBiggest(player1Hand, Suit.Clubs, player1PicBox12, player1PicBoxPlayCard);
+                            }
+                            else if (SuitExistsInHand(player1Hand, Suit.Spades))
+                            {
+                                SuitExistsPlayBiggest(player1Hand, Suit.Spades, player1PicBox12, player1PicBoxPlayCard);
+                            }
+                            else if (SuitExistsInHand(player1Hand, Suit.Diamonds))
+                            {
+                                SuitExistsPlayBiggest(player1Hand, Suit.Diamonds, player1PicBox12, player1PicBoxPlayCard);
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    if (SuitExistsInCardList(cardList, leadingCardSuit) == true)
+                    {
+                        SuitExistsPlayBiggestLess(player1Hand, leadingCardSuit, player1PicBox12, player1PicBoxPlayCard);
+                    }
+                    else
+                    {
+                        if (CardExistsInHand(player1Hand, Suit.Spades, Value.Queen))
+                        {
+                            playCard(player1Hand, Suit.Spades, Value.Queen, player1PicBox12, player1PicBoxPlayCard);
+                        }
+                        else
+                        {
+                            if (SuitExistsInHand(player1Hand, Suit.Hearts))
+                            {
+                                SuitExistsPlayBiggest(player1Hand, Suit.Hearts, player1PicBox12, player1PicBoxPlayCard);
+                            }
+                            else
+                            {
+                                if (SuitExistsInHand(player1Hand, Suit.Clubs))
+                                {
+                                    SuitExistsPlayBiggest(player1Hand, Suit.Clubs, player1PicBox12, player1PicBoxPlayCard);
+                                }
+                                else if (SuitExistsInHand(player1Hand, Suit.Spades))
+                                {
+                                    SuitExistsPlayBiggest(player1Hand, Suit.Spades, player1PicBox12, player1PicBoxPlayCard);
+                                }
+                                else if (SuitExistsInHand(player1Hand, Suit.Diamonds))
+                                {
+                                    SuitExistsPlayBiggest(player1Hand, Suit.Diamonds, player1PicBox12, player1PicBoxPlayCard);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            else if (playerNum == 2)
+            {
+                if (SuitExistsInCardList(cardList, Suit.Hearts) == true)
+                {
+                    if (SuitExistsInHand(player2Hand, Suit.Hearts))
+                    {
+                        SuitExistsPlayBiggestLess(player2Hand, Suit.Hearts, player2PicBox12, player2PicBoxPlayCard);
+                    }
+                    else
+                    {
+                        if (CardExistsInHand(player2Hand, Suit.Spades, Value.Queen))
+                        {
+                            playCard(player2Hand, Suit.Spades, Value.Queen, player2PicBox12, player2PicBoxPlayCard);
+                        }
+                        else
+                        {
+                            if (SuitExistsInHand(player2Hand, Suit.Clubs))
+                            {
+                                SuitExistsPlayBiggest(player2Hand, Suit.Clubs, player2PicBox12, player2PicBoxPlayCard);
+                            }
+                            else if (SuitExistsInHand(player2Hand, Suit.Spades))
+                            {
+                                SuitExistsPlayBiggest(player2Hand, Suit.Spades, player2PicBox12, player2PicBoxPlayCard);
+                            }
+                            else if (SuitExistsInHand(player2Hand, Suit.Diamonds))
+                            {
+                                SuitExistsPlayBiggest(player2Hand, Suit.Diamonds, player2PicBox12, player2PicBoxPlayCard);
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    if (SuitExistsInCardList(cardList, leadingCardSuit) == true)
+                    {
+                        SuitExistsPlayBiggestLess(player2Hand, leadingCardSuit, player2PicBox12, player2PicBoxPlayCard);
+                    }
+                    else
+                    {
+                        if (CardExistsInHand(player2Hand, Suit.Spades, Value.Queen))
+                        {
+                            playCard(player2Hand, Suit.Spades, Value.Queen, player2PicBox12, player2PicBoxPlayCard);
+                        }
+                        else
+                        {
+                            if (SuitExistsInHand(player2Hand, Suit.Hearts))
+                            {
+                                SuitExistsPlayBiggest(player2Hand, Suit.Hearts, player2PicBox12, player2PicBoxPlayCard);
+                            }
+                            else
+                            {
+                                if (SuitExistsInHand(player2Hand, Suit.Clubs))
+                                {
+                                    SuitExistsPlayBiggest(player2Hand, Suit.Clubs, player2PicBox12, player2PicBoxPlayCard);
+                                }
+                                else if (SuitExistsInHand(player2Hand, Suit.Spades))
+                                {
+                                    SuitExistsPlayBiggest(player2Hand, Suit.Spades, player2PicBox12, player2PicBoxPlayCard);
+                                }
+                                else if (SuitExistsInHand(player2Hand, Suit.Diamonds))
+                                {
+                                    SuitExistsPlayBiggest(player2Hand, Suit.Diamonds, player2PicBox12, player2PicBoxPlayCard);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            else if (playerNum == 3)
+            {
+                if (SuitExistsInCardList(cardList, Suit.Hearts) == true)
+                {
+                    if (SuitExistsInHand(player3Hand, Suit.Hearts))
+                    {
+                        SuitExistsPlayBiggestLess(player3Hand, Suit.Hearts, player2PicBox12, player2PicBoxPlayCard);
+                    }
+                    else
+                    {
+                        if (CardExistsInHand(player3Hand, Suit.Spades, Value.Queen))
+                        {
+                            playCard(player3Hand, Suit.Spades, Value.Queen, player2PicBox12, player2PicBoxPlayCard);
+                        }
+                        else
+                        {
+                            if (SuitExistsInHand(player3Hand, Suit.Clubs))
+                            {
+                                SuitExistsPlayBiggest(player3Hand, Suit.Clubs, player2PicBox12, player2PicBoxPlayCard);
+                            }
+                            else if (SuitExistsInHand(player3Hand, Suit.Spades))
+                            {
+                                SuitExistsPlayBiggest(player3Hand, Suit.Spades, player2PicBox12, player2PicBoxPlayCard);
+                            }
+                            else if (SuitExistsInHand(player3Hand, Suit.Diamonds))
+                            {
+                                SuitExistsPlayBiggest(player3Hand, Suit.Diamonds, player2PicBox12, player2PicBoxPlayCard);
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    if (SuitExistsInCardList(cardList, leadingCardSuit) == true)
+                    {
+                        SuitExistsPlayBiggestLess(player3Hand, leadingCardSuit, player3PicBox12, player3PicBoxPlayCard);
+                    }
+                    else
+                    {
+                        if (CardExistsInHand(player3Hand, Suit.Spades, Value.Queen))
+                        {
+                            playCard(player3Hand, Suit.Spades, Value.Queen, player3PicBox12, player3PicBoxPlayCard);
+                        }
+                        else
+                        {
+                            if (SuitExistsInHand(player3Hand, Suit.Hearts))
+                            {
+                                SuitExistsPlayBiggest(player3Hand, Suit.Hearts, player3PicBox12, player3PicBoxPlayCard);
+                            }
+                            else
+                            {
+                                if (SuitExistsInHand(player3Hand, Suit.Clubs))
+                                {
+                                    SuitExistsPlayBiggest(player3Hand, Suit.Clubs, player3PicBox12, player3PicBoxPlayCard);
+                                }
+                                else if (SuitExistsInHand(player3Hand, Suit.Spades))
+                                {
+                                    SuitExistsPlayBiggest(player3Hand, Suit.Spades, player3PicBox12, player3PicBoxPlayCard);
+                                }
+                                else if (SuitExistsInHand(player3Hand, Suit.Diamonds))
+                                {
+                                    SuitExistsPlayBiggest(player3Hand, Suit.Diamonds, player3PicBox12, player3PicBoxPlayCard);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            else if (playerNum == 4)
+            {
+                if (round == 2)
+                {
+                    while (!player4CardPlayedTask2.Task.IsCompleted)
+                    {
+                        await Task.Delay(100);
+                    }
+                }
+                else if (round == 3)
+                {
+                    while (!player4CardPlayedTask3.Task.IsCompleted)
+                    {
+                        await Task.Delay(100);
+                    }
+                }
+                else if (round == 4)
+                {
+                    while (!player4CardPlayedTask4.Task.IsCompleted)
+                    {
+                        await Task.Delay(100);
+                    }
+                }
+                else if (round == 5)
+                {
+                    while (!player4CardPlayedTask5.Task.IsCompleted)
+                    {
+                        await Task.Delay(100);
+                    }
+                }
+            }
+            playCount++;
+        }
+            /* ********************************************************************************************************************** */
 
 
 
@@ -1067,10 +1728,10 @@ namespace Hearts
 
 
 
-        /* ************************************************* Algorithm Methods ************************************************** */
+            /* ************************************************* Algorithm Methods ************************************************** */
 
-        // Function to remove a specified card from a player's hand and also removes a card visually 
-        private async void playCard(List<Card> hand, Suit playSuit, Value playValue, PictureBox picBox, PictureBox playPicBox)
+            // Function to remove a specified card from a player's hand and also removes a card visually 
+            private async void playCard(List<Card> hand, Suit playSuit, Value playValue, PictureBox picBox, PictureBox playPicBox)
         {
             hand.RemoveAll(card => card.Suit == playSuit && card.Value == playValue);
             await Task.Delay(500);
