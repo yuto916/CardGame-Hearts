@@ -27,6 +27,9 @@ namespace Hearts
         private TaskCompletionSource<Card> player4CardPlayedTask8 = new TaskCompletionSource<Card>();
         private TaskCompletionSource<Card> player4CardPlayedTask9 = new TaskCompletionSource<Card>();
         private TaskCompletionSource<Card> player4CardPlayedTask10 = new TaskCompletionSource<Card>();
+        private TaskCompletionSource<Card> player4CardPlayedTask11 = new TaskCompletionSource<Card>();
+        private TaskCompletionSource<Card> player4CardPlayedTask12 = new TaskCompletionSource<Card>();
+        private TaskCompletionSource<Card> player4CardPlayedTask13 = new TaskCompletionSource<Card>();
 
         private Dictionary<PictureBox, Card> pictureBoxCardMap = new Dictionary<PictureBox, Card>();
         private List<Card> player1Hand;
@@ -154,7 +157,6 @@ namespace Hearts
             await Task.Delay(1000);
 
 
-            MessageBox.Show(heartBroken.ToString());
 
             /* ----------------------------------------- Trick 1 ----------------------------------------- */
             // Trick 1.1   
@@ -199,9 +201,10 @@ namespace Hearts
             await Task.Delay(2000);
 
 
-            MessageBox.Show(heartBroken.ToString());
+          
             /* ----------------------------------------- Trick 2 ----------------------------------------- */
             // Trick 2.1
+            if (firstPlayer == 4) { await Task.Delay(3000); }
             Trick2Play1(firstPlayer, player1Hand, player2Hand, player3Hand);
             UpdateCurrentPlayerLabel(secondPlayer);
             await Task.Delay(2000);
@@ -242,9 +245,10 @@ namespace Hearts
             round++;
             await Task.Delay(2000);
 
-            MessageBox.Show(heartBroken.ToString());
+           
             /* ----------------------------------------- Trick 3 ----------------------------------------- */
             // Trick 3.1
+            if (firstPlayer == 4) { await Task.Delay(3000); }
             Trick2Play1(firstPlayer, player1Hand, player2Hand, player3Hand);
             UpdateCurrentPlayerLabel(secondPlayer);
             await Task.Delay(2000);
@@ -278,12 +282,100 @@ namespace Hearts
             }
             /* ------------------------------------------------------------------------------------------- */
 
+
             firstPlayer = UpdateScore(cardList);
             StartRound(firstPlayer);
             UpdateCurrentPlayerLabel(firstPlayer);
             round++;
             await Task.Delay(2000);
 
+
+            /* ----------------------------------------- Trick 4 ----------------------------------------- */
+            // Trick 4.1
+            if (firstPlayer == 4) { await Task.Delay(3000); }
+            Trick2Play1(firstPlayer, player1Hand, player2Hand, player3Hand);
+            UpdateCurrentPlayerLabel(secondPlayer);
+            await Task.Delay(2000);
+
+
+            // Trick 4.2 
+            if (firstPlayer == 4) { await Task.Delay(3000); }
+            if (firstPlayerPicBox.Image != null)
+            {
+                Trick2Play2(secondPlayer, player1Hand, player2Hand, player3Hand);
+                UpdateCurrentPlayerLabel(thirdPlayer);
+                await Task.Delay(1000);
+            }
+
+            // Trick 4.3
+            if (secondPlayer == 4) { await Task.Delay(3000); }
+            if (secondPlayerPicBox.Image != null)
+            {
+                Trick2Play34(thirdPlayer, player1Hand, player2Hand, player3Hand);
+                UpdateCurrentPlayerLabel(fourthPlayer);
+                await Task.Delay(1000);
+            }
+
+            // Trick 4.4
+            if (thirdPlayer == 4) { await Task.Delay(3000); }
+            if (thirdPlayerPicBox.Image != null)
+            {
+                Trick2Play34(fourthPlayer, player1Hand, player2Hand, player3Hand);
+                UpdateCurrentPlayerLabel(firstPlayer);
+                await Task.Delay(1000);
+            }
+            /* ------------------------------------------------------------------------------------------- */
+
+
+            firstPlayer = UpdateScore(cardList);
+            StartRound(firstPlayer);
+            UpdateCurrentPlayerLabel(firstPlayer);
+            round++;
+            await Task.Delay(2000);
+
+
+            /* ----------------------------------------- Trick 5 ----------------------------------------- */
+            // Trick 5.1
+            if (firstPlayer == 4) { await Task.Delay(3000); }
+            Trick2Play1(firstPlayer, player1Hand, player2Hand, player3Hand);
+            UpdateCurrentPlayerLabel(secondPlayer);
+            await Task.Delay(2000);
+
+
+            // Trick 5.2 
+            if (firstPlayer == 4) { await Task.Delay(3000); }
+            if (firstPlayerPicBox.Image != null)
+            {
+                Trick2Play2(secondPlayer, player1Hand, player2Hand, player3Hand);
+                UpdateCurrentPlayerLabel(thirdPlayer);
+                await Task.Delay(1000);
+            }
+
+            // Trick 5.3
+            if (secondPlayer == 4) { await Task.Delay(3000); }
+            if (secondPlayerPicBox.Image != null)
+            {
+                Trick2Play34(thirdPlayer, player1Hand, player2Hand, player3Hand);
+                UpdateCurrentPlayerLabel(fourthPlayer);
+                await Task.Delay(1000);
+            }
+
+            // Trick 5.4
+            if (thirdPlayer == 4) { await Task.Delay(3000); }
+            if (thirdPlayerPicBox.Image != null)
+            {
+                Trick2Play34(fourthPlayer, player1Hand, player2Hand, player3Hand);
+                UpdateCurrentPlayerLabel(firstPlayer);
+                await Task.Delay(1000);
+            }
+            /* ------------------------------------------------------------------------------------------- */
+
+
+            firstPlayer = UpdateScore(cardList);
+            StartRound(firstPlayer);
+            UpdateCurrentPlayerLabel(firstPlayer);
+            round++;
+            await Task.Delay(2000);
 
         }
 
@@ -340,6 +432,8 @@ namespace Hearts
                                 if (round == 1) { player4CardPlayedTask1.SetResult(card);}
                                 else if (round == 2) { player4CardPlayedTask2.SetResult(card); }
                                 else if (round == 3) { player4CardPlayedTask3.SetResult(card); }
+                                else if (round == 4) { player4CardPlayedTask4.SetResult(card); }
+                                else if (round == 5) { player4CardPlayedTask5.SetResult(card); }
                             }
                             else
                             {
@@ -357,6 +451,8 @@ namespace Hearts
                             if(round == 1) { player4CardPlayedTask1.SetResult(card); }
                             else if (round == 2) { player4CardPlayedTask2.SetResult(card); }
                             else if (round == 3) { player4CardPlayedTask3.SetResult(card); }
+                            else if (round == 4) { player4CardPlayedTask4.SetResult(card); }
+                            else if (round == 5) { player4CardPlayedTask5.SetResult(card); }
                         }
 
                         else
@@ -532,7 +628,6 @@ namespace Hearts
             int highestValueIndex = cardList.IndexOf(leadingSuitCards[0]);
             Card highestValueCard = leadingSuitCards[0];
 
-            MessageBox.Show(highestValueCard.ToString());
             int score = CalculateScore(cardList);
 
 
@@ -1777,7 +1872,7 @@ namespace Hearts
             List<Card> specificSuitCardsBig = hand.Where(c => c.Suit == suit && c.Value < highestCard.Value).ToList();
 
             // Create a list from the player's hand (all cards that is the same as the suit)
-            List<Card> specificSuitCards = hand.Where(c => c.Suit == Suit.Clubs).ToList();
+            List<Card> specificSuitCards = hand.Where(c => c.Suit == suit).ToList();
 
             if (specificSuitCardsBig.Count > 0)
             {
