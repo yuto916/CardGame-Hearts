@@ -104,6 +104,7 @@
             label7 = new System.Windows.Forms.Label();
             txtPlayer4Score = new System.Windows.Forms.TextBox();
             label8 = new System.Windows.Forms.Label();
+            lblCurrentTrick = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
@@ -723,10 +724,10 @@
             // lblCurrentPlayer
             // 
             lblCurrentPlayer.AutoSize = true;
-            lblCurrentPlayer.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            lblCurrentPlayer.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             lblCurrentPlayer.Location = new System.Drawing.Point(42, 40);
             lblCurrentPlayer.Name = "lblCurrentPlayer";
-            lblCurrentPlayer.Size = new System.Drawing.Size(158, 31);
+            lblCurrentPlayer.Size = new System.Drawing.Size(135, 28);
             lblCurrentPlayer.TabIndex = 61;
             lblCurrentPlayer.Text = "Current Player";
             // 
@@ -862,12 +863,23 @@
             label8.TabIndex = 73;
             label8.Text = "Player 4:";
             // 
+            // lblCurrentTrick
+            // 
+            lblCurrentTrick.AutoSize = true;
+            lblCurrentTrick.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            lblCurrentTrick.Location = new System.Drawing.Point(42, 75);
+            lblCurrentTrick.Name = "lblCurrentTrick";
+            lblCurrentTrick.Size = new System.Drawing.Size(121, 28);
+            lblCurrentTrick.TabIndex = 75;
+            lblCurrentTrick.Text = "Current Trick";
+            // 
             // frmInGame
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             BackColor = System.Drawing.SystemColors.ActiveCaption;
             ClientSize = new System.Drawing.Size(982, 853);
+            Controls.Add(lblCurrentTrick);
             Controls.Add(txtPlayer4Score);
             Controls.Add(label8);
             Controls.Add(txtPlayer3Score);
@@ -1094,5 +1106,6 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox txtPlayer4Score;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label lblCurrentTrick;
     }
 }
