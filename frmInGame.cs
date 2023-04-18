@@ -562,6 +562,442 @@ namespace Hearts
                 await Task.Delay(1000);
                 playCount++;
             }
+
+            // 2
+            if (trick == 7 && playCount % 4 == 2)
+            {
+                UpdateCurrentPlayerLabel(secondPlayer);
+                lblCurrentTrick.Text = "7.2";
+                if (secondPlayer == 4)
+                {
+                    while (!player4CardPlayedTask7.Task.IsCompleted) { await Task.Delay(100); }
+                }
+                await Task.Delay(1000);
+                Trick2Play2(secondPlayer, player1Hand, player2Hand, player3Hand);
+                await Task.Delay(1000);
+                playCount++;
+            }
+
+            // 3
+            if (trick == 7 && playCount % 4 == 3)
+            {
+                UpdateCurrentPlayerLabel(thirdPlayer);
+                lblCurrentTrick.Text = "7.3";
+                if (thirdPlayer == 4)
+                {
+                    while (!player4CardPlayedTask7.Task.IsCompleted) { await Task.Delay(100); }
+                }
+                await Task.Delay(1000);
+                Trick2Play34(thirdPlayer, player1Hand, player2Hand, player3Hand);
+                await Task.Delay(1000);
+                playCount++;
+            }
+
+            // 4
+            if (trick == 7 && playCount % 4 == 0)
+            {
+                UpdateCurrentPlayerLabel(fourthPlayer);
+                lblCurrentTrick.Text = "7.4";
+                if (fourthPlayer == 4)
+                {
+                    while (!player4CardPlayedTask7.Task.IsCompleted) { await Task.Delay(100); }
+                }
+                await Task.Delay(1000);
+                Trick2Play34(fourthPlayer, player1Hand, player2Hand, player3Hand);
+                await Task.Delay(1000);
+                playCount++;
+                trick++;
+            }
+            /* ----------------------------------------- Trick 8 ----------------------------------------- */
+            // 1
+            if (trick == 8 && playCount % 4 == 1)
+            {
+                firstPlayer = UpdateScore(cardList);
+                StartRound(firstPlayer);
+                UpdateCurrentPlayerLabel(firstPlayer);
+
+
+                lblCurrentTrick.Text = "8.1";
+                if (firstPlayer == 4)
+                {
+                    while (!player4CardPlayedTask8.Task.IsCompleted) { await Task.Delay(100); }
+                }
+                await Task.Delay(1000);
+                Trick2Play1(firstPlayer, player1Hand, player2Hand, player3Hand);
+                await Task.Delay(1000);
+                playCount++;
+            }
+
+            // 2
+            if (trick == 8 && playCount % 4 == 2)
+            {
+                UpdateCurrentPlayerLabel(secondPlayer);
+                lblCurrentTrick.Text = "8.2";
+                if (secondPlayer == 4)
+                {
+                    while (!player4CardPlayedTask8.Task.IsCompleted) { await Task.Delay(100); }
+                }
+                await Task.Delay(1000);
+                Trick2Play2(secondPlayer, player1Hand, player2Hand, player3Hand);
+                await Task.Delay(1000);
+                playCount++;
+            }
+
+            // 3
+            if (trick == 8 && playCount % 4 == 3)
+            {
+                UpdateCurrentPlayerLabel(thirdPlayer);
+                lblCurrentTrick.Text = "8.3";
+                if (thirdPlayer == 4)
+                {
+                    while (!player4CardPlayedTask8.Task.IsCompleted) { await Task.Delay(100); }
+                }
+                await Task.Delay(1000);
+                Trick2Play34(thirdPlayer, player1Hand, player2Hand, player3Hand);
+                await Task.Delay(1000);
+                playCount++;
+            }
+
+            // 4
+            if (trick == 8 && playCount % 4 == 0)
+            {
+                UpdateCurrentPlayerLabel(fourthPlayer);
+                lblCurrentTrick.Text = "8.4";
+                if (fourthPlayer == 4)
+                {
+                    while (!player4CardPlayedTask8.Task.IsCompleted) { await Task.Delay(100); }
+                }
+                await Task.Delay(1000);
+                Trick2Play34(fourthPlayer, player1Hand, player2Hand, player3Hand);
+                await Task.Delay(1000);
+                playCount++;
+                trick++;
+            }
+            /* ----------------------------------------- Trick 9 ----------------------------------------- */
+            // 1
+            if (trick == 9 && playCount % 4 == 1)
+            {
+                firstPlayer = UpdateScore(cardList);
+                StartRound(firstPlayer);
+                UpdateCurrentPlayerLabel(firstPlayer);
+
+
+                lblCurrentTrick.Text = "9.1";
+                if (firstPlayer == 4)
+                {
+                    while (!player4CardPlayedTask9.Task.IsCompleted) { await Task.Delay(100); }
+                }
+                await Task.Delay(1000);
+                Trick2Play1(firstPlayer, player1Hand, player2Hand, player3Hand);
+                await Task.Delay(1000);
+                playCount++;
+            }
+
+            // 2
+            if (trick == 9 && playCount % 4 == 2)
+            {
+                UpdateCurrentPlayerLabel(secondPlayer);
+                lblCurrentTrick.Text = "9.2";
+                if (secondPlayer == 4)
+                {
+                    while (!player4CardPlayedTask9.Task.IsCompleted) { await Task.Delay(100); }
+                }
+                await Task.Delay(1000);
+                Trick2Play2(secondPlayer, player1Hand, player2Hand, player3Hand);
+                await Task.Delay(1000);
+                playCount++;
+            }
+
+            // 3
+            if (trick == 9 && playCount % 4 == 3)
+            {
+                UpdateCurrentPlayerLabel(thirdPlayer);
+                lblCurrentTrick.Text = "9.3";
+                if (thirdPlayer == 4)
+                {
+                    while (!player4CardPlayedTask9.Task.IsCompleted) { await Task.Delay(100); }
+                }
+                await Task.Delay(1000);
+                Trick2Play34(thirdPlayer, player1Hand, player2Hand, player3Hand);
+                await Task.Delay(1000);
+                playCount++;
+            }
+
+            // 4
+            if (trick == 9 && playCount % 4 == 0)
+            {
+                UpdateCurrentPlayerLabel(fourthPlayer);
+                lblCurrentTrick.Text = "9.4";
+                if (fourthPlayer == 4)
+                {
+                    while (!player4CardPlayedTask9.Task.IsCompleted) { await Task.Delay(100); }
+                }
+                await Task.Delay(1000);
+                Trick2Play34(fourthPlayer, player1Hand, player2Hand, player3Hand);
+                await Task.Delay(1000);
+                playCount++;
+                trick++;
+            }
+            /* ----------------------------------------- Trick 10 ----------------------------------------- */
+            // 1
+            if (trick == 10 && playCount % 4 == 1)
+            {
+                firstPlayer = UpdateScore(cardList);
+                StartRound(firstPlayer);
+                UpdateCurrentPlayerLabel(firstPlayer);
+
+
+                lblCurrentTrick.Text = "10.1";
+                if (firstPlayer == 4)
+                {
+                    while (!player4CardPlayedTask10.Task.IsCompleted) { await Task.Delay(100); }
+                }
+                await Task.Delay(1000);
+                Trick2Play1(firstPlayer, player1Hand, player2Hand, player3Hand);
+                await Task.Delay(1000);
+                playCount++;
+            }
+
+            // 2
+            if (trick == 10 && playCount % 4 == 2)
+            {
+                UpdateCurrentPlayerLabel(secondPlayer);
+                lblCurrentTrick.Text = "10.2";
+                if (secondPlayer == 4)
+                {
+                    while (!player4CardPlayedTask10.Task.IsCompleted) { await Task.Delay(100); }
+                }
+                await Task.Delay(1000);
+                Trick2Play2(secondPlayer, player1Hand, player2Hand, player3Hand);
+                await Task.Delay(1000);
+                playCount++;
+            }
+
+            // 3
+            if (trick == 10 && playCount % 4 == 3)
+            {
+                UpdateCurrentPlayerLabel(thirdPlayer);
+                lblCurrentTrick.Text = "10.3";
+                if (thirdPlayer == 4)
+                {
+                    while (!player4CardPlayedTask10.Task.IsCompleted) { await Task.Delay(100); }
+                }
+                await Task.Delay(1000);
+                Trick2Play34(thirdPlayer, player1Hand, player2Hand, player3Hand);
+                await Task.Delay(1000);
+                playCount++;
+            }
+
+            // 4
+            if (trick == 10 && playCount % 4 == 0)
+            {
+                UpdateCurrentPlayerLabel(fourthPlayer);
+                lblCurrentTrick.Text = "10.4";
+                if (fourthPlayer == 4)
+                {
+                    while (!player4CardPlayedTask10.Task.IsCompleted) { await Task.Delay(100); }
+                }
+                await Task.Delay(1000);
+                Trick2Play34(fourthPlayer, player1Hand, player2Hand, player3Hand);
+                await Task.Delay(1000);
+                playCount++;
+                trick++;
+            }
+            /* ----------------------------------------- Trick 11 ----------------------------------------- */
+            // 1
+            if (trick == 11 && playCount % 4 == 1)
+            {
+                firstPlayer = UpdateScore(cardList);
+                StartRound(firstPlayer);
+                UpdateCurrentPlayerLabel(firstPlayer);
+
+
+                lblCurrentTrick.Text = "11.1";
+                if (firstPlayer == 4)
+                {
+                    while (!player4CardPlayedTask11.Task.IsCompleted) { await Task.Delay(100); }
+                }
+                await Task.Delay(1000);
+                Trick2Play1(firstPlayer, player1Hand, player2Hand, player3Hand);
+                await Task.Delay(1000);
+                playCount++;
+            }
+
+            // 2
+            if (trick == 11 && playCount % 4 == 2)
+            {
+                UpdateCurrentPlayerLabel(secondPlayer);
+                lblCurrentTrick.Text = "11.2";
+                if (secondPlayer == 4)
+                {
+                    while (!player4CardPlayedTask11.Task.IsCompleted) { await Task.Delay(100); }
+                }
+                await Task.Delay(1000);
+                Trick2Play2(secondPlayer, player1Hand, player2Hand, player3Hand);
+                await Task.Delay(1000);
+                playCount++;
+            }
+
+            // 3
+            if (trick == 11 && playCount % 4 == 3)
+            {
+                UpdateCurrentPlayerLabel(thirdPlayer);
+                lblCurrentTrick.Text = "11.3";
+                if (thirdPlayer == 4)
+                {
+                    while (!player4CardPlayedTask11.Task.IsCompleted) { await Task.Delay(100); }
+                }
+                await Task.Delay(1000);
+                Trick2Play34(thirdPlayer, player1Hand, player2Hand, player3Hand);
+                await Task.Delay(1000);
+                playCount++;
+            }
+
+            // 4
+            if (trick == 11 && playCount % 4 == 0)
+            {
+                UpdateCurrentPlayerLabel(fourthPlayer);
+                lblCurrentTrick.Text = "11.4";
+                if (fourthPlayer == 4)
+                {
+                    while (!player4CardPlayedTask11.Task.IsCompleted) { await Task.Delay(100); }
+                }
+                await Task.Delay(1000);
+                Trick2Play34(fourthPlayer, player1Hand, player2Hand, player3Hand);
+                await Task.Delay(1000);
+                playCount++;
+                trick++;
+            }
+            /* ----------------------------------------- Trick 12 ----------------------------------------- */
+            // 1
+            if (trick == 12 && playCount % 4 == 1)
+            {
+                firstPlayer = UpdateScore(cardList);
+                StartRound(firstPlayer);
+                UpdateCurrentPlayerLabel(firstPlayer);
+
+
+                lblCurrentTrick.Text = "12.1";
+                if (firstPlayer == 4)
+                {
+                    while (!player4CardPlayedTask12.Task.IsCompleted) { await Task.Delay(100); }
+                }
+                await Task.Delay(1000);
+                Trick2Play1(firstPlayer, player1Hand, player2Hand, player3Hand);
+                await Task.Delay(1000);
+                playCount++;
+            }
+
+            // 2
+            if (trick == 12 && playCount % 4 == 2)
+            {
+                UpdateCurrentPlayerLabel(secondPlayer);
+                lblCurrentTrick.Text = "12.2";
+                if (secondPlayer == 4)
+                {
+                    while (!player4CardPlayedTask12.Task.IsCompleted) { await Task.Delay(100); }
+                }
+                await Task.Delay(1000);
+                Trick2Play2(secondPlayer, player1Hand, player2Hand, player3Hand);
+                await Task.Delay(1000);
+                playCount++;
+            }
+
+            // 3
+            if (trick == 12 && playCount % 4 == 3)
+            {
+                UpdateCurrentPlayerLabel(thirdPlayer);
+                lblCurrentTrick.Text = "12.3";
+                if (thirdPlayer == 4)
+                {
+                    while (!player4CardPlayedTask12.Task.IsCompleted) { await Task.Delay(100); }
+                }
+                await Task.Delay(1000);
+                Trick2Play34(thirdPlayer, player1Hand, player2Hand, player3Hand);
+                await Task.Delay(1000);
+                playCount++;
+            }
+
+            // 4
+            if (trick == 12 && playCount % 4 == 0)
+            {
+                UpdateCurrentPlayerLabel(fourthPlayer);
+                lblCurrentTrick.Text = "12.4";
+                if (fourthPlayer == 4)
+                {
+                    while (!player4CardPlayedTask12.Task.IsCompleted) { await Task.Delay(100); }
+                }
+                await Task.Delay(1000);
+                Trick2Play34(fourthPlayer, player1Hand, player2Hand, player3Hand);
+                await Task.Delay(1000);
+                playCount++;
+                trick++;
+            }
+            /* ----------------------------------------- Trick 13 ----------------------------------------- */
+            // 1
+            if (trick == 13 && playCount % 4 == 1)
+            {
+                firstPlayer = UpdateScore(cardList);
+                StartRound(firstPlayer);
+                UpdateCurrentPlayerLabel(firstPlayer);
+
+
+                lblCurrentTrick.Text = "13.1";
+                if (firstPlayer == 4)
+                {
+                    while (!player4CardPlayedTask13.Task.IsCompleted) { await Task.Delay(100); }
+                }
+                await Task.Delay(1000);
+                Trick2Play1(firstPlayer, player1Hand, player2Hand, player3Hand);
+                await Task.Delay(1000);
+                playCount++;
+            }
+
+            // 2
+            if (trick == 13 && playCount % 4 == 2)
+            {
+                UpdateCurrentPlayerLabel(secondPlayer);
+                lblCurrentTrick.Text = "13.2";
+                if (secondPlayer == 4)
+                {
+                    while (!player4CardPlayedTask13.Task.IsCompleted) { await Task.Delay(100); }
+                }
+                await Task.Delay(1000);
+                Trick2Play2(secondPlayer, player1Hand, player2Hand, player3Hand);
+                await Task.Delay(1000);
+                playCount++;
+            }
+
+            // 3
+            if (trick == 13 && playCount % 4 == 3)
+            {
+                UpdateCurrentPlayerLabel(thirdPlayer);
+                lblCurrentTrick.Text = "13.3";
+                if (thirdPlayer == 4)
+                {
+                    while (!player4CardPlayedTask13.Task.IsCompleted) { await Task.Delay(100); }
+                }
+                await Task.Delay(1000);
+                Trick2Play34(thirdPlayer, player1Hand, player2Hand, player3Hand);
+                await Task.Delay(1000);
+                playCount++;
+            }
+
+            // 4
+            if (trick == 13 && playCount % 4 == 0)
+            {
+                UpdateCurrentPlayerLabel(fourthPlayer);
+                lblCurrentTrick.Text = "13.4";
+                if (fourthPlayer == 4)
+                {
+                    while (!player4CardPlayedTask13.Task.IsCompleted) { await Task.Delay(100); }
+                }
+                await Task.Delay(1000);
+                Trick2Play34(fourthPlayer, player1Hand, player2Hand, player3Hand);
+                await Task.Delay(1000);
+                playCount++;
+                trick++;
+            }
         }
 
 
@@ -573,10 +1009,19 @@ namespace Hearts
             DialogResult result = MessageBox.Show("Are you sure you want to exit the game?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
             {
-                Application.Exit();
+                GoToHome(sender, e);
             }
         }
 
+        private void GoToHome(object sender, EventArgs e)
+        {
+            frmInGame frmInGame = this;
+            frmHome frmHome = new frmHome();
+
+
+            frmInGame.Hide();
+            frmHome.ShowDialog();
+        }
 
         // ------------------------------------------------------------------------------------------------------------------------
         private void btnRestartGame_Click(object sender, EventArgs e)
@@ -716,7 +1161,7 @@ namespace Hearts
 
 
 
-
+       
 
 
 
@@ -1606,7 +2051,7 @@ namespace Hearts
                 }
                 else
                 {
-                    if (SuitExistsInHand(player1Hand, leadingCardSuit) == true)
+                    if (SuitExistsInHand(player2Hand, leadingCardSuit) == true)
                     {
                         SuitExistsPlayBiggestLess(player2Hand, leadingCardSuit, pl2PicBox, player2PicBoxPlayCard);
                     }
@@ -1680,7 +2125,7 @@ namespace Hearts
                 }
                 else
                 {
-                    if (SuitExistsInHand(player1Hand, leadingCardSuit) == true)
+                    if (SuitExistsInHand(player3Hand, leadingCardSuit) == true)
                     {
                         SuitExistsPlayBiggestLess(player3Hand, leadingCardSuit, pl3PicBox, player3PicBoxPlayCard);
                     }
@@ -1948,6 +2393,36 @@ namespace Hearts
                 }
             }
         }
+
+        // ------------------------------------------------------------------------------------------------------------------------
+        /*
+        private async void Trick13Play1234(int playerNum, List<Card> player1Hand, List<Card> player2Hand, List<Card> player3Hand)
+        {
+            if (playerNum == 1)
+            {
+                string picBoxName = "player1PicBox" + (14 - trick);
+                PictureBox pl1PicBox = this.Controls.Find(picBoxName, true).FirstOrDefault() as PictureBox;
+
+                playCard(player1Hand, player1Hand[0].Suit, player1Hand[0].Value, pl1PicBox, player1PicBoxPlayCard);
+            }
+
+            if (playerNum == 2)
+            {
+                string picBoxName = "player2PicBox" + (14 - trick);
+                PictureBox pl2PicBox = this.Controls.Find(picBoxName, true).FirstOrDefault() as PictureBox;
+
+                playCard(player2Hand, player2Hand[0].Suit, player2Hand[0].Value, pl2PicBox, player2PicBoxPlayCard);
+            }
+
+            if (playerNum == 3)
+            {
+                string picBoxName = "player3PicBox" + (14 - trick);
+                PictureBox pl3PicBox = this.Controls.Find(picBoxName, true).FirstOrDefault() as PictureBox;
+
+                playCard(player3Hand, player3Hand[0].Suit, player3Hand[0].Value, pl3PicBox, player3PicBoxPlayCard);
+            }
+        }
+        */
         /* ********************************************************************************************************************** */
 
 
