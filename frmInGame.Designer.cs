@@ -34,19 +34,6 @@
             pictureBox3 = new System.Windows.Forms.PictureBox();
             pictureBox4 = new System.Windows.Forms.PictureBox();
             label1 = new System.Windows.Forms.Label();
-            player4PicBox1 = new System.Windows.Forms.PictureBox();
-            player4PicBox2 = new System.Windows.Forms.PictureBox();
-            player4PicBox3 = new System.Windows.Forms.PictureBox();
-            player4PicBox4 = new System.Windows.Forms.PictureBox();
-            player4PicBox5 = new System.Windows.Forms.PictureBox();
-            player4PicBox6 = new System.Windows.Forms.PictureBox();
-            player4PicBox12 = new System.Windows.Forms.PictureBox();
-            player4PicBox11 = new System.Windows.Forms.PictureBox();
-            player4PicBox10 = new System.Windows.Forms.PictureBox();
-            player4PicBox9 = new System.Windows.Forms.PictureBox();
-            player4PicBox8 = new System.Windows.Forms.PictureBox();
-            player4PicBox7 = new System.Windows.Forms.PictureBox();
-            player4PicBox13 = new System.Windows.Forms.PictureBox();
             player4PicBoxPlayCard = new System.Windows.Forms.PictureBox();
             player2PicBoxPlayCard = new System.Windows.Forms.PictureBox();
             player3PicBoxPlayCard = new System.Windows.Forms.PictureBox();
@@ -109,19 +96,6 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)player4PicBox1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)player4PicBox2).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)player4PicBox3).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)player4PicBox4).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)player4PicBox5).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)player4PicBox6).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)player4PicBox12).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)player4PicBox11).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)player4PicBox10).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)player4PicBox9).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)player4PicBox8).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)player4PicBox7).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)player4PicBox13).BeginInit();
             ((System.ComponentModel.ISupportInitialize)player4PicBoxPlayCard).BeginInit();
             ((System.ComponentModel.ISupportInitialize)player2PicBoxPlayCard).BeginInit();
             ((System.ComponentModel.ISupportInitialize)player3PicBoxPlayCard).BeginInit();
@@ -216,123 +190,6 @@
             label1.Size = new System.Drawing.Size(44, 28);
             label1.TabIndex = 4;
             label1.Text = "You";
-            // 
-            // player4PicBox1
-            // 
-            player4PicBox1.Location = new System.Drawing.Point(298, 603);
-            player4PicBox1.Name = "player4PicBox1";
-            player4PicBox1.Size = new System.Drawing.Size(60, 90);
-            player4PicBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            player4PicBox1.TabIndex = 5;
-            player4PicBox1.TabStop = false;
-            // 
-            // player4PicBox2
-            // 
-            player4PicBox2.Location = new System.Drawing.Point(324, 603);
-            player4PicBox2.Name = "player4PicBox2";
-            player4PicBox2.Size = new System.Drawing.Size(60, 90);
-            player4PicBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            player4PicBox2.TabIndex = 6;
-            player4PicBox2.TabStop = false;
-            // 
-            // player4PicBox3
-            // 
-            player4PicBox3.Location = new System.Drawing.Point(349, 603);
-            player4PicBox3.Name = "player4PicBox3";
-            player4PicBox3.Size = new System.Drawing.Size(60, 90);
-            player4PicBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            player4PicBox3.TabIndex = 7;
-            player4PicBox3.TabStop = false;
-            // 
-            // player4PicBox4
-            // 
-            player4PicBox4.Location = new System.Drawing.Point(374, 603);
-            player4PicBox4.Name = "player4PicBox4";
-            player4PicBox4.Size = new System.Drawing.Size(60, 90);
-            player4PicBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            player4PicBox4.TabIndex = 8;
-            player4PicBox4.TabStop = false;
-            // 
-            // player4PicBox5
-            // 
-            player4PicBox5.Location = new System.Drawing.Point(400, 603);
-            player4PicBox5.Name = "player4PicBox5";
-            player4PicBox5.Size = new System.Drawing.Size(60, 90);
-            player4PicBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            player4PicBox5.TabIndex = 9;
-            player4PicBox5.TabStop = false;
-            // 
-            // player4PicBox6
-            // 
-            player4PicBox6.Location = new System.Drawing.Point(427, 603);
-            player4PicBox6.Name = "player4PicBox6";
-            player4PicBox6.Size = new System.Drawing.Size(60, 90);
-            player4PicBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            player4PicBox6.TabIndex = 10;
-            player4PicBox6.TabStop = false;
-            // 
-            // player4PicBox12
-            // 
-            player4PicBox12.Location = new System.Drawing.Point(588, 603);
-            player4PicBox12.Name = "player4PicBox12";
-            player4PicBox12.Size = new System.Drawing.Size(60, 90);
-            player4PicBox12.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            player4PicBox12.TabIndex = 16;
-            player4PicBox12.TabStop = false;
-            // 
-            // player4PicBox11
-            // 
-            player4PicBox11.Location = new System.Drawing.Point(561, 603);
-            player4PicBox11.Name = "player4PicBox11";
-            player4PicBox11.Size = new System.Drawing.Size(60, 90);
-            player4PicBox11.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            player4PicBox11.TabIndex = 15;
-            player4PicBox11.TabStop = false;
-            // 
-            // player4PicBox10
-            // 
-            player4PicBox10.Location = new System.Drawing.Point(535, 603);
-            player4PicBox10.Name = "player4PicBox10";
-            player4PicBox10.Size = new System.Drawing.Size(60, 90);
-            player4PicBox10.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            player4PicBox10.TabIndex = 14;
-            player4PicBox10.TabStop = false;
-            // 
-            // player4PicBox9
-            // 
-            player4PicBox9.Location = new System.Drawing.Point(510, 603);
-            player4PicBox9.Name = "player4PicBox9";
-            player4PicBox9.Size = new System.Drawing.Size(60, 90);
-            player4PicBox9.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            player4PicBox9.TabIndex = 13;
-            player4PicBox9.TabStop = false;
-            // 
-            // player4PicBox8
-            // 
-            player4PicBox8.Location = new System.Drawing.Point(483, 603);
-            player4PicBox8.Name = "player4PicBox8";
-            player4PicBox8.Size = new System.Drawing.Size(60, 90);
-            player4PicBox8.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            player4PicBox8.TabIndex = 12;
-            player4PicBox8.TabStop = false;
-            // 
-            // player4PicBox7
-            // 
-            player4PicBox7.Location = new System.Drawing.Point(453, 603);
-            player4PicBox7.Name = "player4PicBox7";
-            player4PicBox7.Size = new System.Drawing.Size(60, 90);
-            player4PicBox7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            player4PicBox7.TabIndex = 11;
-            player4PicBox7.TabStop = false;
-            // 
-            // player4PicBox13
-            // 
-            player4PicBox13.Location = new System.Drawing.Point(614, 603);
-            player4PicBox13.Name = "player4PicBox13";
-            player4PicBox13.Size = new System.Drawing.Size(60, 90);
-            player4PicBox13.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            player4PicBox13.TabIndex = 17;
-            player4PicBox13.TabStop = false;
             // 
             // player4PicBoxPlayCard
             // 
@@ -937,19 +794,6 @@
             Controls.Add(player3PicBoxPlayCard);
             Controls.Add(player2PicBoxPlayCard);
             Controls.Add(player4PicBoxPlayCard);
-            Controls.Add(player4PicBox13);
-            Controls.Add(player4PicBox12);
-            Controls.Add(player4PicBox11);
-            Controls.Add(player4PicBox10);
-            Controls.Add(player4PicBox9);
-            Controls.Add(player4PicBox8);
-            Controls.Add(player4PicBox7);
-            Controls.Add(player4PicBox6);
-            Controls.Add(player4PicBox5);
-            Controls.Add(player4PicBox4);
-            Controls.Add(player4PicBox3);
-            Controls.Add(player4PicBox2);
-            Controls.Add(player4PicBox1);
             Controls.Add(label1);
             Controls.Add(pictureBox4);
             Controls.Add(pictureBox3);
@@ -963,19 +807,6 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
-            ((System.ComponentModel.ISupportInitialize)player4PicBox1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)player4PicBox2).EndInit();
-            ((System.ComponentModel.ISupportInitialize)player4PicBox3).EndInit();
-            ((System.ComponentModel.ISupportInitialize)player4PicBox4).EndInit();
-            ((System.ComponentModel.ISupportInitialize)player4PicBox5).EndInit();
-            ((System.ComponentModel.ISupportInitialize)player4PicBox6).EndInit();
-            ((System.ComponentModel.ISupportInitialize)player4PicBox12).EndInit();
-            ((System.ComponentModel.ISupportInitialize)player4PicBox11).EndInit();
-            ((System.ComponentModel.ISupportInitialize)player4PicBox10).EndInit();
-            ((System.ComponentModel.ISupportInitialize)player4PicBox9).EndInit();
-            ((System.ComponentModel.ISupportInitialize)player4PicBox8).EndInit();
-            ((System.ComponentModel.ISupportInitialize)player4PicBox7).EndInit();
-            ((System.ComponentModel.ISupportInitialize)player4PicBox13).EndInit();
             ((System.ComponentModel.ISupportInitialize)player4PicBoxPlayCard).EndInit();
             ((System.ComponentModel.ISupportInitialize)player2PicBoxPlayCard).EndInit();
             ((System.ComponentModel.ISupportInitialize)player3PicBoxPlayCard).EndInit();
@@ -1036,19 +867,6 @@
         private System.Windows.Forms.PictureBox pictureBox8;
         private System.Windows.Forms.PictureBox pictureBox9;
         private System.Windows.Forms.PictureBox pictureBox10;
-        private System.Windows.Forms.PictureBox player4PicBox1;
-        private System.Windows.Forms.PictureBox player4PicBox2;
-        private System.Windows.Forms.PictureBox player4PicBox3;
-        private System.Windows.Forms.PictureBox player4PicBox4;
-        private System.Windows.Forms.PictureBox player4PicBox5;
-        private System.Windows.Forms.PictureBox player4PicBox6;
-        private System.Windows.Forms.PictureBox player4PicBox12;
-        private System.Windows.Forms.PictureBox player4PicBox11;
-        private System.Windows.Forms.PictureBox player4PicBox10;
-        private System.Windows.Forms.PictureBox player4PicBox9;
-        private System.Windows.Forms.PictureBox player4PicBox8;
-        private System.Windows.Forms.PictureBox player4PicBox7;
-        private System.Windows.Forms.PictureBox player4PicBox13;
         private System.Windows.Forms.PictureBox player4PicBoxPlayCard;
         private System.Windows.Forms.PictureBox player2PicBoxPlayCard;
         private System.Windows.Forms.PictureBox player3PicBoxPlayCard;
