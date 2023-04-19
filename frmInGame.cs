@@ -61,7 +61,9 @@ namespace Hearts
         bool heartBroken = false;
 
 
+        // Constants
         const int NUM_OF_PLAYERS = 4;
+        const int GAME_END_THRESHOLD = 100;
         /* ****************************************************************************************************************** */
 
 
@@ -1099,8 +1101,8 @@ namespace Hearts
                     taskCount++;
 
                     UpdateScore(cardList);
+                    CheckGameEnd();
                 }
-                MessageBox.Show("Starting New Round!");
                 await Task.Delay(1000);
 
 
@@ -1138,11 +1140,11 @@ namespace Hearts
             DialogResult result = MessageBox.Show("Are you sure you want to exit the game?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
             {
-                GoToHome(sender, e);
+                GoToHome();
             }
         }
 
-        private void GoToHome(object sender, EventArgs e)
+        private void GoToHome()
         {
             frmInGame frmInGame = this;
             frmHome frmHome = new frmHome();
@@ -1523,6 +1525,48 @@ namespace Hearts
 
 
 
+        private void CheckGameEnd()
+        {
+            int lowestScore = player1Score;
+            string winner = "Player 1";
+
+            if (player2Score < lowestScore)
+            {
+                lowestScore = player2Score;
+                winner = "Player 2";
+            }
+
+            if (player3Score < lowestScore)
+            {
+                lowestScore = player3Score;
+                winner = "PLayer 3";
+            }
+
+            if (player4Score < lowestScore)
+            {
+                lowestScore = player4Score;
+                winner = "Player 4";
+            }
+
+            if (player1Score > GAME_END_THRESHOLD || player2Score > GAME_END_THRESHOLD || player3Score > GAME_END_THRESHOLD || player4Score > GAME_END_THRESHOLD)
+            {
+                DialogResult result = MessageBox.Show("Game is over! " + winner + " won!! Would you like to start a new game?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (result == DialogResult.Yes)
+                {
+                    StartNewRound();
+                }
+                else
+                {
+                    GoToHome();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Starting New Round!");
+            }
+        }
+
+
 
 
         /* ********************************************************************************************************************** */
@@ -1604,7 +1648,7 @@ namespace Hearts
 
 
         // ------------------------------------------------------------------------------------------------------------------------
-        private async void Trick1Play2(int playerNum, List<Card> player1Hand, List<Card> player2Hand, List<Card> player3Hand)
+        private void Trick1Play2(int playerNum, List<Card> player1Hand, List<Card> player2Hand, List<Card> player3Hand)
         {
             leadingCardSuit = cardList[0].Suit;
             leadingCardValue = cardList[0].Value;
@@ -1716,7 +1760,7 @@ namespace Hearts
 
 
         // ------------------------------------------------------------------------------------------------------------------------
-        private async void Trick1Play3(int playerNum, List<Card> player1Hand, List<Card> player2Hand, List<Card> player3Hand)
+        private void Trick1Play3(int playerNum, List<Card> player1Hand, List<Card> player2Hand, List<Card> player3Hand)
         {
             leadingCardSuit = cardList[0].Suit;
             leadingCardValue = cardList[0].Value;
@@ -1828,7 +1872,7 @@ namespace Hearts
 
 
         // ------------------------------------------------------------------------------------------------------------------------
-        private async void Trick1Play4(int playerNum, List<Card> player1Hand, List<Card> player2Hand, List<Card> player3Hand)
+        private void Trick1Play4(int playerNum, List<Card> player1Hand, List<Card> player2Hand, List<Card> player3Hand)
         {
             leadingCardSuit = cardList[0].Suit;
             leadingCardValue = cardList[0].Value;
@@ -1973,7 +2017,7 @@ namespace Hearts
 
 
         // ------------------------------------------------------------------------------------------------------------------------
-        private async void Trick2Play1(int playerNum, List<Card> player1Hand, List<Card> player2Hand, List<Card> player3Hand)
+        private void Trick2Play1(int playerNum, List<Card> player1Hand, List<Card> player2Hand, List<Card> player3Hand)
         {
             if (playerNum == 1)
             {
@@ -2064,7 +2108,7 @@ namespace Hearts
 
 
         // ------------------------------------------------------------------------------------------------------------------------
-        private async void Trick2Play2(int playerNum, List<Card> player1Hand, List<Card> player2Hand, List<Card> player3Hand)
+        private void Trick2Play2(int playerNum, List<Card> player1Hand, List<Card> player2Hand, List<Card> player3Hand)
         {
             leadingCardSuit = cardList[0].Suit;
             leadingCardValue = cardList[0].Value;
@@ -2295,7 +2339,7 @@ namespace Hearts
 
 
         // ------------------------------------------------------------------------------------------------------------------------
-        private async void Trick2Play34(int playerNum, List<Card> player1Hand, List<Card> player2Hand, List<Card> player3Hand)
+        private void Trick2Play34(int playerNum, List<Card> player1Hand, List<Card> player2Hand, List<Card> player3Hand)
         {
             leadingCardSuit = cardList[0].Suit;
             leadingCardValue = cardList[0].Value;
@@ -2524,7 +2568,7 @@ namespace Hearts
         }
 
         // ------------------------------------------------------------------------------------------------------------------------
-        private async void Trick13Play1234(int playerNum, List<Card> player1Hand, List<Card> player2Hand, List<Card> player3Hand)
+        private void Trick13Play1234(int playerNum, List<Card> player1Hand, List<Card> player2Hand, List<Card> player3Hand)
         {
             if (playerNum == 1)
             {
