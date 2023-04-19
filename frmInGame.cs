@@ -53,7 +53,7 @@ namespace Hearts
         int taskCount = 0;
 
 
-       
+
         Suit leadingCardSuit;
         Value leadingCardValue;
 
@@ -76,6 +76,77 @@ namespace Hearts
             InitializeComponent();
         }
 
+        private void InsertPlayer1PicBoxes()
+        {
+            int x = 150;
+            int y = 500;
+            int width = 90;
+            int height = 60;
+
+            for (int i = 1; i <= 13; i++)
+            {
+                // Create the new PictureBox control
+                PictureBox newPictureBox = new PictureBox();
+                newPictureBox.Location = new Point(x, y);
+                newPictureBox.Size = new Size(width, height);
+                newPictureBox.Name = "player1PicBox" + i.ToString();
+                newPictureBox.SizeMode = PictureBoxSizeMode.Zoom;
+
+                // Add the PictureBox control to the form
+                this.Controls.Add(newPictureBox);
+                newPictureBox.BringToFront();
+
+                y -= 20;
+            }
+        }
+
+        private void InsertPlayer2PicBoxes()
+        {
+            int x = 300;
+            int y = 130;
+            int width = 60;
+            int height = 90;
+
+            for (int i = 1; i <= 13; i++)
+            {
+                // Create the new PictureBox control
+                PictureBox newPictureBox = new PictureBox();
+                newPictureBox.Location = new Point(x, y);
+                newPictureBox.Size = new Size(width, height);
+                newPictureBox.Name = "player2PicBox" + i.ToString();
+                newPictureBox.SizeMode = PictureBoxSizeMode.Zoom;
+
+                // Add the PictureBox control to the form
+                this.Controls.Add(newPictureBox);
+                newPictureBox.BringToFront();
+
+                x += 25;
+            }
+        }
+
+        private void InsertPlayer3PicBoxes()
+        {
+            int x = 750;
+            int y = 500;
+            int width = 90;
+            int height = 60;
+
+            for (int i = 1; i <= 13; i++)
+            {
+                // Create the new PictureBox control
+                PictureBox newPictureBox = new PictureBox();
+                newPictureBox.Location = new Point(x, y);
+                newPictureBox.Size = new Size(width, height);
+                newPictureBox.Name = "player3PicBox" + i.ToString();
+                newPictureBox.SizeMode = PictureBoxSizeMode.Zoom;
+
+                // Add the PictureBox control to the form
+                this.Controls.Add(newPictureBox);
+                newPictureBox.BringToFront();
+
+                y -= 20;
+            }
+        }
 
         private void InsertPlayer4PicBoxes()
         {
@@ -97,14 +168,13 @@ namespace Hearts
                 this.Controls.Add(newPictureBox);
                 newPictureBox.BringToFront();
 
-                // Increment the position for the next PictureBox control
                 x += 25;
             }
         }
 
 
         private async void frmInGame_Load(object sender, EventArgs e)
-        { 
+        {
             while (gameFinished == false)
             {
                 for (int i = 1; i <= 13; i++)
@@ -112,7 +182,9 @@ namespace Hearts
                     player4CardPlayedTask.Add(new TaskCompletionSource<Card>());
                 }
 
-
+                InsertPlayer1PicBoxes();
+                InsertPlayer2PicBoxes();
+                InsertPlayer3PicBoxes();
                 InsertPlayer4PicBoxes();
                 var hands = await StartGame();
 
@@ -154,7 +226,7 @@ namespace Hearts
                 pictureBoxCardMap[pb12] = player4Hand[11];
                 pictureBoxCardMap[pb13] = player4Hand[12];
 
-               
+
                 // Add click event handlers to each picture box
                 pb1.Click += PictureBox_Click;
                 pb2.Click += PictureBox_Click;
@@ -1500,15 +1572,24 @@ namespace Hearts
         {
             if (playerNum == 1)
             {
-                playCard(player1Hand, Suit.Clubs, Value.Two, player1PicBox13, player1PicBoxPlayCard);
+                string picBoxName = "player1PicBox" + (14 - trick);
+                PictureBox pl1PicBox = this.Controls.Find(picBoxName, true).FirstOrDefault() as PictureBox;
+
+                playCard(player1Hand, Suit.Clubs, Value.Two, pl1PicBox, player1PicBoxPlayCard);
             }
             else if (playerNum == 2)
             {
-                playCard(player2Hand, Suit.Clubs, Value.Two, player2PicBox13, player2PicBoxPlayCard);
+                string picBoxName = "player2PicBox" + (14 - trick);
+                PictureBox pl2PicBox = this.Controls.Find(picBoxName, true).FirstOrDefault() as PictureBox;
+
+                playCard(player2Hand, Suit.Clubs, Value.Two, pl2PicBox, player2PicBoxPlayCard);
             }
             else if (playerNum == 3)
             {
-                playCard(player3Hand, Suit.Clubs, Value.Two, player3PicBox13, player3PicBoxPlayCard);
+                string picBoxName = "player3PicBox" + (14 - trick);
+                PictureBox pl3PicBox = this.Controls.Find(picBoxName, true).FirstOrDefault() as PictureBox;
+
+                playCard(player3Hand, Suit.Clubs, Value.Two, pl3PicBox, player3PicBoxPlayCard);
             }
             else if (playerNum == 4)
             {
@@ -1530,95 +1611,104 @@ namespace Hearts
 
             if (playerNum == 1)
             {
+                string picBoxName = "player1PicBox" + (14 - trick);
+                PictureBox pl1PicBox = this.Controls.Find(picBoxName, true).FirstOrDefault() as PictureBox;
+
                 if (SuitExistsInHand(player1Hand, leadingCardSuit) == true)
                 {
-                    SuitExistsPlayMiddle(player1Hand, leadingCardSuit, player1PicBox13, player1PicBoxPlayCard);
+                    SuitExistsPlayMiddle(player1Hand, leadingCardSuit, pl1PicBox, player1PicBoxPlayCard);
                 }
 
                 else if (CardExistsInHand(player1Hand, Suit.Spades, Value.Queen))
                 {
                     Card card = player1Hand.Find(c => c.Suit == Suit.Spades && c.Value == Value.Queen);
 
-                    playCard(player1Hand, Suit.Spades, Value.Queen, player1PicBox13, player1PicBoxPlayCard);
+                    playCard(player1Hand, Suit.Spades, Value.Queen, pl1PicBox, player1PicBoxPlayCard);
                 }
 
                 else if (SuitExistsInHand(player1Hand, Suit.Hearts))
                 {
-                    SuitExistsPlayBiggest(player1Hand, Suit.Hearts, player1PicBox13, player1PicBoxPlayCard);
+                    SuitExistsPlayBiggest(player1Hand, Suit.Hearts, pl1PicBox, player1PicBoxPlayCard);
                     heartBroken = true;
                 }
 
                 else if (SuitExistsInHand(player1Hand, Suit.Spades))
                 {
-                    SuitExistsPlayBiggest(player1Hand, Suit.Spades, player1PicBox13, player1PicBoxPlayCard);
+                    SuitExistsPlayBiggest(player1Hand, Suit.Spades, pl1PicBox, player1PicBoxPlayCard);
                 }
 
                 else if (SuitExistsInHand(player1Hand, Suit.Diamonds))
                 {
-                    SuitExistsPlayBiggest(player1Hand, Suit.Diamonds, player1PicBox13, player1PicBoxPlayCard);
+                    SuitExistsPlayBiggest(player1Hand, Suit.Diamonds, pl1PicBox, player1PicBoxPlayCard);
                 }
             }
 
 
             else if (playerNum == 2)
             {
+                string picBoxName = "player2PicBox" + (14 - trick);
+                PictureBox pl2PicBox = this.Controls.Find(picBoxName, true).FirstOrDefault() as PictureBox;
+
                 if (SuitExistsInHand(player2Hand, leadingCardSuit) == true)
                 {
-                    SuitExistsPlayMiddle(player2Hand, leadingCardSuit, player2PicBox13, player2PicBoxPlayCard);
+                    SuitExistsPlayMiddle(player2Hand, leadingCardSuit, pl2PicBox, player2PicBoxPlayCard);
                 }
 
                 else if (CardExistsInHand(player2Hand, Suit.Spades, Value.Queen))
                 {
                     Card card = player2Hand.Find(c => c.Suit == Suit.Spades && c.Value == Value.Queen);
 
-                    playCard(player2Hand, Suit.Spades, Value.Queen, player2PicBox13, player2PicBoxPlayCard);
+                    playCard(player2Hand, Suit.Spades, Value.Queen, pl2PicBox, player2PicBoxPlayCard);
                 }
 
                 else if (SuitExistsInHand(player2Hand, Suit.Hearts))
                 {
-                    SuitExistsPlayBiggest(player2Hand, Suit.Hearts, player2PicBox13, player2PicBoxPlayCard);
+                    SuitExistsPlayBiggest(player2Hand, Suit.Hearts, pl2PicBox, player2PicBoxPlayCard);
                     heartBroken = true;
                 }
 
                 else if (SuitExistsInHand(player2Hand, Suit.Spades))
                 {
-                    SuitExistsPlayBiggest(player2Hand, Suit.Spades, player2PicBox13, player2PicBoxPlayCard);
+                    SuitExistsPlayBiggest(player2Hand, Suit.Spades, pl2PicBox, player2PicBoxPlayCard);
                 }
 
                 else if (SuitExistsInHand(player2Hand, Suit.Diamonds))
                 {
-                    SuitExistsPlayBiggest(player2Hand, Suit.Diamonds, player2PicBox12, player2PicBoxPlayCard);
+                    SuitExistsPlayBiggest(player2Hand, Suit.Diamonds, pl2PicBox, player2PicBoxPlayCard);
                 }
             }
 
             else if (playerNum == 3)
             {
+                string picBoxName = "player3PicBox" + (14 - trick);
+                PictureBox pl3PicBox = this.Controls.Find(picBoxName, true).FirstOrDefault() as PictureBox;
+
                 if (SuitExistsInHand(player3Hand, leadingCardSuit) == true)
                 {
-                    SuitExistsPlayMiddle(player3Hand, leadingCardSuit, player3PicBox13, player3PicBoxPlayCard);
+                    SuitExistsPlayMiddle(player3Hand, leadingCardSuit, pl3PicBox, player3PicBoxPlayCard);
                 }
 
                 else if (CardExistsInHand(player3Hand, Suit.Spades, Value.Queen))
                 {
                     Card card = player3Hand.Find(c => c.Suit == Suit.Spades && c.Value == Value.Queen);
 
-                    playCard(player3Hand, Suit.Spades, Value.Queen, player3PicBox13, player3PicBoxPlayCard);
+                    playCard(player3Hand, Suit.Spades, Value.Queen, pl3PicBox, player3PicBoxPlayCard);
                 }
 
                 else if (SuitExistsInHand(player3Hand, Suit.Hearts))
                 {
-                    SuitExistsPlayBiggest(player3Hand, Suit.Hearts, player3PicBox13, player3PicBoxPlayCard);
+                    SuitExistsPlayBiggest(player3Hand, Suit.Hearts, pl3PicBox, player3PicBoxPlayCard);
                     heartBroken = true;
                 }
 
                 else if (SuitExistsInHand(player3Hand, Suit.Spades))
                 {
-                    SuitExistsPlayBiggest(player3Hand, Suit.Spades, player3PicBox13, player3PicBoxPlayCard);
+                    SuitExistsPlayBiggest(player3Hand, Suit.Spades, pl3PicBox, player3PicBoxPlayCard);
                 }
 
                 else if (SuitExistsInHand(player3Hand, Suit.Diamonds))
                 {
-                    SuitExistsPlayBiggest(player3Hand, Suit.Diamonds, player3PicBox13, player3PicBoxPlayCard);
+                    SuitExistsPlayBiggest(player3Hand, Suit.Diamonds, pl3PicBox, player3PicBoxPlayCard);
                 }
             }
         }
@@ -1633,95 +1723,104 @@ namespace Hearts
 
             if (playerNum == 1)
             {
+                string picBoxName = "player1PicBox" + (14 - trick);
+                PictureBox pl1PicBox = this.Controls.Find(picBoxName, true).FirstOrDefault() as PictureBox;
+
                 if (SuitExistsInHand(player1Hand, leadingCardSuit) == true)
                 {
-                    SuitExistsPlayBiggestLess(player1Hand, leadingCardSuit, player1PicBox13, player1PicBoxPlayCard);
+                    SuitExistsPlayBiggestLess(player1Hand, leadingCardSuit, pl1PicBox, player1PicBoxPlayCard);
                 }
 
                 else if (CardExistsInHand(player1Hand, Suit.Spades, Value.Queen))
                 {
                     Card card = player1Hand.Find(c => c.Suit == Suit.Spades && c.Value == Value.Queen);
 
-                    playCard(player1Hand, Suit.Spades, Value.Queen, player1PicBox13, player1PicBoxPlayCard);
+                    playCard(player1Hand, Suit.Spades, Value.Queen, pl1PicBox, player1PicBoxPlayCard);
                 }
 
                 else if (SuitExistsInHand(player1Hand, Suit.Hearts))
                 {
-                    SuitExistsPlayBiggest(player1Hand, Suit.Hearts, player1PicBox13, player1PicBoxPlayCard);
+                    SuitExistsPlayBiggest(player1Hand, Suit.Hearts, pl1PicBox, player1PicBoxPlayCard);
                     heartBroken = true;
                 }
 
                 else if (SuitExistsInHand(player1Hand, Suit.Spades))
                 {
-                    SuitExistsPlayBiggest(player1Hand, Suit.Spades, player1PicBox13, player1PicBoxPlayCard);
+                    SuitExistsPlayBiggest(player1Hand, Suit.Spades, pl1PicBox, player1PicBoxPlayCard);
                 }
 
                 else if (SuitExistsInHand(player1Hand, Suit.Diamonds))
                 {
-                    SuitExistsPlayBiggest(player1Hand, Suit.Diamonds, player1PicBox13, player1PicBoxPlayCard);
+                    SuitExistsPlayBiggest(player1Hand, Suit.Diamonds, pl1PicBox, player1PicBoxPlayCard);
                 }
             }
 
 
             else if (playerNum == 2)
             {
+                string picBoxName = "player2PicBox" + (14 - trick);
+                PictureBox pl2PicBox = this.Controls.Find(picBoxName, true).FirstOrDefault() as PictureBox;
+
                 if (SuitExistsInHand(player2Hand, leadingCardSuit) == true)
                 {
-                    SuitExistsPlayBiggestLess(player2Hand, leadingCardSuit, player2PicBox13, player2PicBoxPlayCard);
+                    SuitExistsPlayBiggestLess(player2Hand, leadingCardSuit, pl2PicBox, player2PicBoxPlayCard);
                 }
 
                 else if (CardExistsInHand(player2Hand, Suit.Spades, Value.Queen))
                 {
                     Card card = player2Hand.Find(c => c.Suit == Suit.Spades && c.Value == Value.Queen);
 
-                    playCard(player2Hand, Suit.Spades, Value.Queen, player2PicBox13, player2PicBoxPlayCard);
+                    playCard(player2Hand, Suit.Spades, Value.Queen, pl2PicBox, player2PicBoxPlayCard);
                 }
 
                 else if (SuitExistsInHand(player2Hand, Suit.Hearts))
                 {
-                    SuitExistsPlayBiggest(player2Hand, Suit.Hearts, player2PicBox13, player2PicBoxPlayCard);
+                    SuitExistsPlayBiggest(player2Hand, Suit.Hearts, pl2PicBox, player2PicBoxPlayCard);
                     heartBroken = true;
                 }
 
                 else if (SuitExistsInHand(player2Hand, Suit.Spades))
                 {
-                    SuitExistsPlayBiggest(player2Hand, Suit.Spades, player2PicBox13, player2PicBoxPlayCard);
+                    SuitExistsPlayBiggest(player2Hand, Suit.Spades, pl2PicBox, player2PicBoxPlayCard);
                 }
 
                 else if (SuitExistsInHand(player2Hand, Suit.Diamonds))
                 {
-                    SuitExistsPlayBiggest(player2Hand, Suit.Diamonds, player2PicBox12, player2PicBoxPlayCard);
+                    SuitExistsPlayBiggest(player2Hand, Suit.Diamonds, pl2PicBox, player2PicBoxPlayCard);
                 }
             }
 
             else if (playerNum == 3)
             {
+                string picBoxName = "player3PicBox" + (14 - trick);
+                PictureBox pl3PicBox = this.Controls.Find(picBoxName, true).FirstOrDefault() as PictureBox;
+
                 if (SuitExistsInHand(player3Hand, leadingCardSuit) == true)
                 {
-                    SuitExistsPlayBiggestLess(player3Hand, leadingCardSuit, player3PicBox13, player3PicBoxPlayCard);
+                    SuitExistsPlayBiggestLess(player3Hand, leadingCardSuit, pl3PicBox, player3PicBoxPlayCard);
                 }
 
                 else if (CardExistsInHand(player3Hand, Suit.Spades, Value.Queen))
                 {
                     Card card = player3Hand.Find(c => c.Suit == Suit.Spades && c.Value == Value.Queen);
 
-                    playCard(player3Hand, Suit.Spades, Value.Queen, player3PicBox13, player3PicBoxPlayCard);
+                    playCard(player3Hand, Suit.Spades, Value.Queen, pl3PicBox, player3PicBoxPlayCard);
                 }
 
                 else if (SuitExistsInHand(player3Hand, Suit.Hearts))
                 {
-                    SuitExistsPlayBiggest(player3Hand, Suit.Hearts, player3PicBox13, player3PicBoxPlayCard);
+                    SuitExistsPlayBiggest(player3Hand, Suit.Hearts, pl3PicBox, player3PicBoxPlayCard);
                     heartBroken = true;
                 }
 
                 else if (SuitExistsInHand(player3Hand, Suit.Spades))
                 {
-                    SuitExistsPlayBiggest(player3Hand, Suit.Spades, player3PicBox13, player3PicBoxPlayCard);
+                    SuitExistsPlayBiggest(player3Hand, Suit.Spades, pl3PicBox, player3PicBoxPlayCard);
                 }
 
                 else if (SuitExistsInHand(player3Hand, Suit.Diamonds))
                 {
-                    SuitExistsPlayBiggest(player3Hand, Suit.Diamonds, player3PicBox13, player3PicBoxPlayCard);
+                    SuitExistsPlayBiggest(player3Hand, Suit.Diamonds, pl3PicBox, player3PicBoxPlayCard);
                 }
             }
         }
@@ -1736,40 +1835,43 @@ namespace Hearts
 
             if (playerNum == 1)
             {
+                string picBoxName = "player1PicBox" + (14 - trick);
+                PictureBox pl1PicBox = this.Controls.Find(picBoxName, true).FirstOrDefault() as PictureBox;
+
                 if (SuitExistsInHand(player1Hand, leadingCardSuit) == true)
                 {
                     if (SuitExistsInCardList(cardList, Suit.Hearts) == true || CardExistsInCardList(cardList, Suit.Spades, Value.Queen) == true)
                     {
-                        SuitExistsPlayBiggestLess(player1Hand, leadingCardSuit, player1PicBox13, player1PicBoxPlayCard);
+                        SuitExistsPlayBiggestLess(player1Hand, leadingCardSuit, pl1PicBox, player1PicBoxPlayCard);
                     }
                     else
                     {
-                        SuitExistsPlayBiggest(player1Hand, Suit.Clubs, player1PicBox13, player1PicBoxPlayCard);
+                        SuitExistsPlayBiggest(player1Hand, Suit.Clubs, pl1PicBox, player1PicBoxPlayCard);
                     }
                 }
                 else
                 {
                     if (CardExistsInCardList(cardList, Suit.Spades, Value.Queen) == true)
                     {
-                        playCard(player1Hand, Suit.Spades, Value.Queen, player1PicBox13, player1PicBoxPlayCard);
+                        playCard(player1Hand, Suit.Spades, Value.Queen, pl1PicBox, player1PicBoxPlayCard);
                     }
                     else
                     {
                         if (SuitExistsInHand(player1Hand, Suit.Hearts))
                         {
-                            SuitExistsPlayBiggest(player1Hand, Suit.Hearts, player1PicBox13, player1PicBoxPlayCard);
+                            SuitExistsPlayBiggest(player1Hand, Suit.Hearts, pl1PicBox, player1PicBoxPlayCard);
                             heartBroken = true;
                         }
                         else
                         {
                             if (SuitExistsInHand(player1Hand, Suit.Spades))
                             {
-                                SuitExistsPlayBiggest(player1Hand, Suit.Spades, player1PicBox13, player1PicBoxPlayCard);
+                                SuitExistsPlayBiggest(player1Hand, Suit.Spades, pl1PicBox, player1PicBoxPlayCard);
                             }
 
                             else if (SuitExistsInHand(player1Hand, Suit.Diamonds))
                             {
-                                SuitExistsPlayBiggest(player1Hand, Suit.Diamonds, player1PicBox13, player1PicBoxPlayCard);
+                                SuitExistsPlayBiggest(player1Hand, Suit.Diamonds, pl1PicBox, player1PicBoxPlayCard);
                             }
                         }
                     }
@@ -1779,40 +1881,43 @@ namespace Hearts
 
             else if (playerNum == 2)
             {
+                string picBoxName = "player2PicBox" + (14 - trick);
+                PictureBox pl2PicBox = this.Controls.Find(picBoxName, true).FirstOrDefault() as PictureBox;
+
                 if (SuitExistsInHand(player2Hand, leadingCardSuit) == true)
                 {
                     if (SuitExistsInCardList(cardList, Suit.Hearts) == true || CardExistsInCardList(cardList, Suit.Spades, Value.Queen) == true)
                     {
-                        SuitExistsPlayBiggestLess(player2Hand, leadingCardSuit, player2PicBox13, player2PicBoxPlayCard);
+                        SuitExistsPlayBiggestLess(player2Hand, leadingCardSuit, pl2PicBox, player2PicBoxPlayCard);
                     }
                     else
                     {
-                        SuitExistsPlayBiggest(player2Hand, Suit.Clubs, player2PicBox13, player2PicBoxPlayCard);
+                        SuitExistsPlayBiggest(player2Hand, Suit.Clubs, pl2PicBox, player2PicBoxPlayCard);
                     }
                 }
                 else
                 {
                     if (CardExistsInCardList(cardList, Suit.Spades, Value.Queen) == true)
                     {
-                        playCard(player2Hand, Suit.Spades, Value.Queen, player2PicBox13, player2PicBoxPlayCard);
+                        playCard(player2Hand, Suit.Spades, Value.Queen, pl2PicBox, player2PicBoxPlayCard);
                     }
                     else
                     {
                         if (SuitExistsInHand(player2Hand, Suit.Hearts))
                         {
-                            SuitExistsPlayBiggest(player2Hand, Suit.Hearts, player2PicBox13, player2PicBoxPlayCard);
+                            SuitExistsPlayBiggest(player2Hand, Suit.Hearts, pl2PicBox, player2PicBoxPlayCard);
                             heartBroken = true;
                         }
                         else
                         {
                             if (SuitExistsInHand(player2Hand, Suit.Spades))
                             {
-                                SuitExistsPlayBiggest(player2Hand, Suit.Spades, player2PicBox13, player2PicBoxPlayCard);
+                                SuitExistsPlayBiggest(player2Hand, Suit.Spades, pl2PicBox, player2PicBoxPlayCard);
                             }
 
                             else if (SuitExistsInHand(player2Hand, Suit.Diamonds))
                             {
-                                SuitExistsPlayBiggest(player2Hand, Suit.Diamonds, player2PicBox13, player2PicBoxPlayCard);
+                                SuitExistsPlayBiggest(player2Hand, Suit.Diamonds, pl2PicBox, player2PicBoxPlayCard);
                             }
                         }
                     }
@@ -1821,40 +1926,43 @@ namespace Hearts
 
             else if (playerNum == 3)
             {
+                string picBoxName = "player3PicBox" + (14 - trick);
+                PictureBox pl3PicBox = this.Controls.Find(picBoxName, true).FirstOrDefault() as PictureBox;
+
                 if (SuitExistsInHand(player3Hand, leadingCardSuit) == true)
                 {
                     if (SuitExistsInCardList(cardList, Suit.Hearts) == true || CardExistsInCardList(cardList, Suit.Spades, Value.Queen) == true)
                     {
-                        SuitExistsPlayBiggestLess(player3Hand, leadingCardSuit, player3PicBox13, player3PicBoxPlayCard);
+                        SuitExistsPlayBiggestLess(player3Hand, leadingCardSuit, pl3PicBox, player3PicBoxPlayCard);
                     }
                     else
                     {
-                        SuitExistsPlayBiggest(player3Hand, Suit.Clubs, player3PicBox13, player3PicBoxPlayCard);
+                        SuitExistsPlayBiggest(player3Hand, Suit.Clubs, pl3PicBox, player3PicBoxPlayCard);
                     }
                 }
                 else
                 {
                     if (CardExistsInCardList(cardList, Suit.Spades, Value.Queen) == true)
                     {
-                        playCard(player3Hand, Suit.Spades, Value.Queen, player3PicBox13, player3PicBoxPlayCard);
+                        playCard(player3Hand, Suit.Spades, Value.Queen, pl3PicBox, player3PicBoxPlayCard);
                     }
                     else
                     {
                         if (SuitExistsInHand(player3Hand, Suit.Hearts))
                         {
-                            SuitExistsPlayBiggest(player3Hand, Suit.Hearts, player3PicBox13, player3PicBoxPlayCard);
+                            SuitExistsPlayBiggest(player3Hand, Suit.Hearts, pl3PicBox, player3PicBoxPlayCard);
                             heartBroken = true;
                         }
                         else
                         {
                             if (SuitExistsInHand(player3Hand, Suit.Spades))
                             {
-                                SuitExistsPlayBiggest(player3Hand, Suit.Spades, player3PicBox13, player3PicBoxPlayCard);
+                                SuitExistsPlayBiggest(player3Hand, Suit.Spades, pl3PicBox, player3PicBoxPlayCard);
                             }
 
                             else if (SuitExistsInHand(player3Hand, Suit.Diamonds))
                             {
-                                SuitExistsPlayBiggest(player3Hand, Suit.Diamonds, player3PicBox13, player3PicBoxPlayCard);
+                                SuitExistsPlayBiggest(player3Hand, Suit.Diamonds, pl3PicBox, player3PicBoxPlayCard);
                             }
                         }
                     }
