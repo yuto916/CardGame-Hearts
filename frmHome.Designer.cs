@@ -31,7 +31,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmHome));
             pictureBox1 = new System.Windows.Forms.PictureBox();
             btnStartGame = new System.Windows.Forms.Button();
-            btnScoreBoard = new System.Windows.Forms.Button();
             btnExit = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
@@ -49,23 +48,13 @@
             // btnStartGame
             // 
             btnStartGame.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            btnStartGame.Location = new System.Drawing.Point(105, 345);
+            btnStartGame.Location = new System.Drawing.Point(104, 399);
             btnStartGame.Name = "btnStartGame";
             btnStartGame.Size = new System.Drawing.Size(160, 37);
             btnStartGame.TabIndex = 1;
             btnStartGame.Text = "Start Game";
             btnStartGame.UseVisualStyleBackColor = true;
             btnStartGame.Click += btnStartGame_Click;
-            // 
-            // btnScoreBoard
-            // 
-            btnScoreBoard.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            btnScoreBoard.Location = new System.Drawing.Point(106, 399);
-            btnScoreBoard.Name = "btnScoreBoard";
-            btnScoreBoard.Size = new System.Drawing.Size(159, 39);
-            btnScoreBoard.TabIndex = 2;
-            btnScoreBoard.Text = "Score Board";
-            btnScoreBoard.UseVisualStyleBackColor = true;
             // 
             // btnExit
             // 
@@ -85,7 +74,6 @@
             BackColor = System.Drawing.SystemColors.ActiveCaption;
             ClientSize = new System.Drawing.Size(800, 470);
             Controls.Add(btnExit);
-            Controls.Add(btnScoreBoard);
             Controls.Add(btnStartGame);
             Controls.Add(pictureBox1);
             Name = "frmHome";
@@ -99,7 +87,6 @@
 
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button btnStartGame;
-        private System.Windows.Forms.Button btnScoreBoard;
         private System.Windows.Forms.Button btnExit;
     }
 }

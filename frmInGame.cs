@@ -59,7 +59,7 @@ namespace Hearts
 
 
         bool heartBroken = false;
-
+        bool heartsBrokenExecuted = false;
 
         // Constants
         const int NUM_OF_PLAYERS = 4;
@@ -76,6 +76,13 @@ namespace Hearts
         public frmInGame()
         {
             InitializeComponent();
+        }
+
+
+        private void displayHeartsBrokenPic()
+        {
+            string imagePath = $"{Application.StartupPath}\\..\\..\\..\\img\\hearts-broken.png";
+            picBoxHeartsBroken.Image = Image.FromFile(imagePath);
         }
 
         private void InsertPlayer1PicBoxes()
@@ -1125,6 +1132,8 @@ namespace Hearts
                 leadingCardSuit = Suit.Clubs;
                 leadingCardValue = Value.Two;
 
+                picBoxHeartsBroken.Image = null;
+                heartsBrokenExecuted = false;
                 heartBroken = false;
 
 
@@ -1366,6 +1375,14 @@ namespace Hearts
         // ------------------------------------------------------------------------------------------------------------------------
         private void UpdateCurrentPlayerLabel(int playerNum)
         {
+            // Display hearts broken picture if heart is broken
+            if (heartsBrokenExecuted == false && heartBroken == true)
+            {
+                heartsBrokenExecuted = true;
+                MessageBox.Show("Hearts Broken!!!");
+                displayHeartsBrokenPic();
+            }
+
             if (playerNum == 4)
             {
                 lblCurrentPlayer.Text = "Current Player: You";

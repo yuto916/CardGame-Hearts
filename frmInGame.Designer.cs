@@ -53,6 +53,7 @@
             txtPlayer4Score = new System.Windows.Forms.TextBox();
             label8 = new System.Windows.Forms.Label();
             lblCurrentTrick = new System.Windows.Forms.Label();
+            picBoxHeartsBroken = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
@@ -61,6 +62,7 @@
             ((System.ComponentModel.ISupportInitialize)player2PicBoxPlayCard).BeginInit();
             ((System.ComponentModel.ISupportInitialize)player3PicBoxPlayCard).BeginInit();
             ((System.ComponentModel.ISupportInitialize)player1PicBoxPlayCard).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)picBoxHeartsBroken).BeginInit();
             SuspendLayout();
             // 
             // pictureBox1
@@ -68,7 +70,7 @@
             pictureBox1.Image = (System.Drawing.Image)resources.GetObject("pictureBox1.Image");
             pictureBox1.Location = new System.Drawing.Point(29, 352);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new System.Drawing.Size(98, 89);
+            pictureBox1.Size = new System.Drawing.Size(100, 100);
             pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             pictureBox1.TabIndex = 0;
             pictureBox1.TabStop = false;
@@ -78,7 +80,7 @@
             pictureBox2.Image = (System.Drawing.Image)resources.GetObject("pictureBox2.Image");
             pictureBox2.Location = new System.Drawing.Point(422, 28);
             pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new System.Drawing.Size(98, 89);
+            pictureBox2.Size = new System.Drawing.Size(100, 100);
             pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             pictureBox2.TabIndex = 1;
             pictureBox2.TabStop = false;
@@ -88,7 +90,7 @@
             pictureBox3.Image = (System.Drawing.Image)resources.GetObject("pictureBox3.Image");
             pictureBox3.Location = new System.Drawing.Point(846, 352);
             pictureBox3.Name = "pictureBox3";
-            pictureBox3.Size = new System.Drawing.Size(98, 89);
+            pictureBox3.Size = new System.Drawing.Size(100, 100);
             pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             pictureBox3.TabIndex = 2;
             pictureBox3.TabStop = false;
@@ -98,7 +100,7 @@
             pictureBox4.Image = (System.Drawing.Image)resources.GetObject("pictureBox4.Image");
             pictureBox4.Location = new System.Drawing.Point(422, 714);
             pictureBox4.Name = "pictureBox4";
-            pictureBox4.Size = new System.Drawing.Size(98, 89);
+            pictureBox4.Size = new System.Drawing.Size(100, 100);
             pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             pictureBox4.TabIndex = 3;
             pictureBox4.TabStop = false;
@@ -107,7 +109,7 @@
             // 
             label1.AutoSize = true;
             label1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            label1.Location = new System.Drawing.Point(448, 806);
+            label1.Location = new System.Drawing.Point(452, 817);
             label1.Name = "label1";
             label1.Size = new System.Drawing.Size(44, 28);
             label1.TabIndex = 4;
@@ -133,7 +135,7 @@
             // 
             // player3PicBoxPlayCard
             // 
-            player3PicBoxPlayCard.Location = new System.Drawing.Point(541, 361);
+            player3PicBoxPlayCard.Location = new System.Drawing.Point(535, 361);
             player3PicBoxPlayCard.Name = "player3PicBoxPlayCard";
             player3PicBoxPlayCard.Size = new System.Drawing.Size(60, 90);
             player3PicBoxPlayCard.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -163,7 +165,7 @@
             // 
             label2.AutoSize = true;
             label2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            label2.Location = new System.Drawing.Point(42, 449);
+            label2.Location = new System.Drawing.Point(42, 473);
             label2.Name = "label2";
             label2.Size = new System.Drawing.Size(81, 28);
             label2.TabIndex = 62;
@@ -183,7 +185,7 @@
             // 
             label4.AutoSize = true;
             label4.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            label4.Location = new System.Drawing.Point(863, 449);
+            label4.Location = new System.Drawing.Point(863, 473);
             label4.Name = "label4";
             label4.Size = new System.Drawing.Size(81, 28);
             label4.TabIndex = 64;
@@ -285,11 +287,11 @@
             // 
             label8.AutoSize = true;
             label8.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            label8.Location = new System.Drawing.Point(771, 167);
+            label8.Location = new System.Drawing.Point(807, 167);
             label8.Name = "label8";
-            label8.Size = new System.Drawing.Size(79, 23);
+            label8.Size = new System.Drawing.Size(43, 23);
             label8.TabIndex = 73;
-            label8.Text = "Player 4:";
+            label8.Text = "You:";
             // 
             // lblCurrentTrick
             // 
@@ -301,12 +303,22 @@
             lblCurrentTrick.TabIndex = 75;
             lblCurrentTrick.Text = "Current Trick";
             // 
+            // picBoxHeartsBroken
+            // 
+            picBoxHeartsBroken.Location = new System.Drawing.Point(29, 674);
+            picBoxHeartsBroken.Name = "picBoxHeartsBroken";
+            picBoxHeartsBroken.Size = new System.Drawing.Size(140, 140);
+            picBoxHeartsBroken.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            picBoxHeartsBroken.TabIndex = 76;
+            picBoxHeartsBroken.TabStop = false;
+            // 
             // frmInGame
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             BackColor = System.Drawing.SystemColors.ActiveCaption;
             ClientSize = new System.Drawing.Size(982, 853);
+            Controls.Add(picBoxHeartsBroken);
             Controls.Add(lblCurrentTrick);
             Controls.Add(txtPlayer4Score);
             Controls.Add(label8);
@@ -343,6 +355,7 @@
             ((System.ComponentModel.ISupportInitialize)player2PicBoxPlayCard).EndInit();
             ((System.ComponentModel.ISupportInitialize)player3PicBoxPlayCard).EndInit();
             ((System.ComponentModel.ISupportInitialize)player1PicBoxPlayCard).EndInit();
+            ((System.ComponentModel.ISupportInitialize)picBoxHeartsBroken).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -379,5 +392,6 @@
         private System.Windows.Forms.TextBox txtPlayer4Score;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label lblCurrentTrick;
+        private System.Windows.Forms.PictureBox picBoxHeartsBroken;
     }
 }
