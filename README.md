@@ -12,6 +12,7 @@
 ## Technologies Used
 * C#
 * Windows Presentation Foundation (WPF)
+* Visual Studio
 <br />
 
 ## Card Game Rules
