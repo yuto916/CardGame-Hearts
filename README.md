@@ -9,10 +9,10 @@
 <br/>
 
 
-## Technologies USed
+## Technologies Used
 * C#
 * Windows Presentation Foundation (WPF)
-
+<br />
 
 ## Card Game Rules
 #### The Objective
@@ -43,6 +43,7 @@
    If a player plays a heart card, then the heart will be broken, meaning players can now lead the new trick with a Heart.
    Additionally, if a player has only heart cards, they can lead the game with a heart card even if the heart has not been broken yet.
 4. A player wins a trick when they play the highest card of the suit that is led. The winner leads the next trick.
+<br/>
 
 #### Breaking Hearts
 Players are not allowed to lead a heart card until the hearts are broken. 
