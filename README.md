@@ -9,11 +9,18 @@
 <br/>
 
 
+## Demo Video
+https://github.com/yuto916/CardGame-Hearts/assets/113719404/9a3af6af-81b9-4ad1-af8d-64ea74233fe7
+
+<br/>
+
+
 ## Technologies Used
 * C#
 * Windows Presentation Foundation (WPF)
 * Visual Studio
 <br />
+
 
 ## Card Game Rules
 #### The Objective
